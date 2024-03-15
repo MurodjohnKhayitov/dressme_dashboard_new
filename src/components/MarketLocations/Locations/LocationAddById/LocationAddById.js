@@ -586,9 +586,9 @@ export default function LocationAddById() {
           </div>
         </div>
         <div className="w-full  px-4 md:px-0  ">
-          <div className="  gap-x-3 md:gap-4  grid grid-cols-3 gap-4">
+          <div className="     grid grid-col-1 md:grid-cols-3 gap-y-3  md:gap-4">
             {/* INPUT DATA */}
-            <div className={"w-full block md:hidden mb-3 md:mb-0"}>
+            <div className={"w-full block md:hidden    "}>
               <label htmlFor="selectRegion2">
                 <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
                   {t("choose_region")}
@@ -643,7 +643,7 @@ export default function LocationAddById() {
                 )}
               </label>
             </div>
-            <label htmlFor="fname" className=" w-full   mb-3 md:mb-0">
+            <label htmlFor="fname" className=" w-full      ">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin")}
                 <span className="ml-[5px]">
@@ -667,7 +667,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label htmlFor="fname2" className=" w-full   mb-3 md:mb-0">
+            <label htmlFor="fname2" className=" w-full     ">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin_two")}
               </div>
@@ -748,7 +748,7 @@ export default function LocationAddById() {
               </div>
             </div>
             <label
-              className=" w-full   mb-3 md:mb-0 "
+              className=" w-full     "
               htmlFor="phone1"
             >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
@@ -797,7 +797,7 @@ export default function LocationAddById() {
             </label>
             <label
               htmlFor="phone2"
-              className=" w-full   mb-3 md:mb-0 "
+              className=" w-full    "
             >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_two")}
@@ -886,7 +886,7 @@ export default function LocationAddById() {
                 />
               </div>
             </div>
-            <div htmlFor="telegrem1" className=" w-full   mb-3 md:mb-0">
+            <div htmlFor="telegrem1" className=" w-full     ">
               <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_tg")}
               </p>
@@ -902,7 +902,7 @@ export default function LocationAddById() {
 
               </div>
             </div>
-            <div htmlFor="telegrem2" className=" w-full   mb-3 md:mb-0">
+            <div htmlFor="telegrem2" className=" w-full     ">
               <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_tg_two")}
               </p>
