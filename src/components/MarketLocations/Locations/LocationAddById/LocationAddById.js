@@ -756,7 +756,9 @@ export default function LocationAddById() {
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
-              </div>
+              </div> 
+
+              
 
               <div className="h-[32px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
