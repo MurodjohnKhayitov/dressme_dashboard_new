@@ -148,12 +148,10 @@ function EditProfilePage() {
       return { error, status };
     }
   };
-
   const customHeadersRegion = {
     "Content-type": "application/json; charset=UTF-8",
     'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
-
   useQuery(["get_region_list"], () => fetchDataRegion(customHeadersRegion), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
