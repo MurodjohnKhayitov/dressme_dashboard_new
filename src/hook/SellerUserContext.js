@@ -8,7 +8,7 @@ export const SellerMainData = createContext();
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function SellerUserContext({ children }) {
-    const [sellerInformation, setSellerInformation] = useState([]);
+    const [sellerInformation, setSellerInformation] = useState(null);
 
     // setDressInfo({ ...dressInfo, sellerStatus: data?.status })
 
@@ -50,7 +50,7 @@ export default function SellerUserContext({ children }) {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
     };
-    useQuery(["get_profile_list3"], () => fetchData(customHeaders), {
+    useQuery(["get_profile_list3"], () => !sellerInformation && fetchData(customHeaders), {
         onSuccess: (data) => {
             if (data?.status >= 200 && data?.status < 300) {
                 setSellerInformation(data?.data)
