@@ -96,12 +96,12 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
         })
     }, [stateList])
     useEffect(() => {
-        if (state?.salePercent > 0) {
+        if (Number(state?.salePercent) > 0) {
             const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: parseInt(sale) })
-        } else {
-            setState({ ...state, salePrice: '' })
+        }
+        if (!state?.salePercent) {
+            setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
 
@@ -213,7 +213,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
             minHips: null,
             maxHips: null,
             ageNum: null,
-            salePercent: null,
+            salePercent: "",
             salePrice: null,
             sizeListCheck: null,
             productColorId: null,
@@ -237,7 +237,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                 minHips: data?.min_hip_girth || null,
                 maxHips: data?.max_hip_girth || null,
                 ageNum: data?.age || null,
-                salePercent: data?.discount_percent || null,
+                salePercent: Number(data?.discount_percent) > 0 ? Number(data?.discount_percent) : "",
                 salePrice: data?.discount_price || null,
                 sizeListCheck: data?.letter_size || null,
                 productColorId: data?.product_color_id || null,
@@ -249,7 +249,6 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        // const formattedValue = Number(sanitizedValue).toLocaleString()
         setState({ ...state, priceNum: sanitizedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangeSalePrice = (event) => {
@@ -262,6 +261,9 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
+        }
+        if (!value) {
+            setState({ ...state, salePercent: "", saveBtnDisable: true, disableSizes: 1 });
         }
     };
     useEffect(() => {

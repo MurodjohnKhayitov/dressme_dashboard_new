@@ -36,17 +36,16 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
         onConcel: false,
         toggleShow: false,
         checkEmpty: false
-
     })
     const { t } = useTranslation("product");
-
     useEffect(() => {
-        if (state?.salePercent > 0) {
-            const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
+        if (Number(state?.salePercent) > 0) {
+            const sale = Number(state?.priceNum) * (100 - Number(state?.salePercent)) / 100
             // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: parseInt(sale) })
-        } else {
-            setState({ ...state, salePrice: '' })
+        }
+        if (!state?.salePercent) {
+            setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
 
@@ -162,6 +161,9 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value });
         }
+        if (!value?.trim()) {
+            setState({ ...state, salePercent: "" });
+        }
     };
 
     const onHandleSelectSize = (name) => {
@@ -175,8 +177,8 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
             setState({ ...state, sizeListCheck: name })
         }
     }
-    const contentOutwear = (
-        <div className="w-[855px] h-fit">
+     const contentOutwear = (
+        <div className="w-[855px] h-fit  ">
             <div
                 className={`w-full h-fit flex flex-col items-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >
@@ -613,11 +615,11 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
                                         {state?.priceNum > 0 ?
                                             <input
-                                                type="number" 
+                                                type="number"
                                                 placeholder="0"
                                                 name="salePercent"
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                value={Number(state?.salePercent)?.toLocaleString()}
+                                                value={state?.salePercent}
                                                 onChange={handleChangePercent}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -688,7 +690,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
                         <span key={item?.id}> {languageDetector?.typeLang === "ru" && item?.name_ru}
-                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                            {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                     )
                 })
             }

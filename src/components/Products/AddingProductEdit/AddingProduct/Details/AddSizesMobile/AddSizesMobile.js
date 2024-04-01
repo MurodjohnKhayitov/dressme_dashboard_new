@@ -112,7 +112,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         // handleCallBack()
     }, [productsDataIdEdit?.sizes])
 
-     const [toggleShow, setToggleShow] = useState(false)
+    const [toggleShow, setToggleShow] = useState(false)
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
         sizeList1: [
@@ -684,12 +684,12 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
     };
 
     useEffect(() => {
-        if (state?.salePercent > 0) {
+        if (Number(state?.salePercent) > 0) {
             const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
-            // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: parseInt(sale) })
-        } else {
-            setState({ ...state, salePrice: '' })
+        }
+        if (!state?.salePercent) {
+            setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
 
@@ -697,6 +697,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value });
+        }
+        if (!value) {
+            setState({ ...state, salePercent: "" });
         }
     };
     const onHandleSelectSize = (name, id) => {
@@ -710,7 +713,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             setState({ ...state, sizeListCheck: name, selected: id })
         }
     }
-   
+
     return (
         <div className="max-w-[440px] w-full h-fit bg-white py-4 px-2 rounded-t-lg " >
             <div className="w-full flex items-center justify-between   mb-4">
@@ -1361,7 +1364,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                                     name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={Number(state?.salePercent)?.toLocaleString()}
+                                                    value={state?.salePercent}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -1825,7 +1828,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                                     name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={Number(state?.salePercent)?.toLocaleString()}
+                                                    value={state?.salePercent}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 />
@@ -2061,7 +2064,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                                     name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={Number(state?.salePercent)?.toLocaleString()}
+                                                    value={state?.salePercent}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -2416,7 +2419,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                                     placeholder="0"
                                                     name="salePercent"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={Number(state?.salePercent)?.toLocaleString()}
+                                                    value={state?.salePercent}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 

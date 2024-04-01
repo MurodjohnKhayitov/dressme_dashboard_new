@@ -43,8 +43,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
         quantityNum: "",
         age: "",
         price: "",
-        salePercent: "",
-        salePrice: "",
+        discountPercent: "",
+        discountPrice: "",
         sizeListCheck: "",
         selected: "",
         isCheckValid: false,
@@ -105,17 +105,19 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, salePrice: formattedValue });
+        setState({ ...state, discountPrice: formattedValue });
     };
 
 
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
-            setState({ ...state, salePercent: value });
+            setState({ ...state, discountPercent: value });
+        }
+        if (!value) {
+            setState({ ...state, discountPercent: "" });
         }
     };
-
     const onChangeSwitch = (checked) => {
         setState({ ...state, sizeCheck: checked })
     };
@@ -134,8 +136,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                     amount: state?.quantityNum,
                     age: state?.age,
                     price: state?.price,
-                    discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice,
+                    discountPercent: state?.discountPercent,
+                    discountPrice: state?.discountPrice,
                     category_Id: 1,
                 })
                 setDressInfo({ ...dressInfo, ProductFilterType: 1 })
@@ -165,8 +167,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                     amount: state?.quantityNum,
                     age: state?.age,
                     price: state?.price,
-                    discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice,
+                    discountPercent: state?.discountPercent,
+                    discountPrice: state?.discountPrice,
                     category_Id: 2,
 
                 })
@@ -198,8 +200,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                     amount: state?.quantityNum,
                     age: state?.age,
                     price: state?.price,
-                    discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice,
+                    discountPercent: state?.discountPercent,
+                    discountPrice: state?.discountPrice,
                     category_Id: 3,
                 })
             }
@@ -216,8 +218,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                     amount: state?.quantityNum,
                     age: state?.age,
                     price: state?.price,
-                    discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice,
+                    discountPercent: state?.discountPercent,
+                    discountPrice: state?.discountPrice,
                     category_Id: 4,
                 })
                 setDressInfo({ ...dressInfo, ProductFilterType: 4 })
@@ -237,8 +239,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                 amount: state?.quantityNum,
                 age: state?.age,
                 price: state?.price,
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice,
+                discountPercent: state?.discountPercent,
+                discountPrice: state?.discountPrice,
                 category_Id: 5,
 
             })
@@ -275,8 +277,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
             quantityNum: null,
             age: null,
             price: null,
-            salePercent: null,
-            salePrice: null,
+            discountPercent: "",
+            discountPrice: "",
             sizeListCheck: null,
             selected: null,
             isCheckValid: false,
@@ -300,15 +302,16 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
         })
     }
 
+
     useEffect(() => {
-        if (state?.salePercent > 0) {
-            const value = Number(state?.price) * (100 - state?.salePercent) / 100
-            // const formattedValue = parseInt(value).toLocaleString()
-            setState({ ...state, salePrice: parseInt(value) })
-        } else {
-            setState({ ...state, salePrice: '' })
+        if (Number(state?.discountPercent) > 0) {
+            const value = Number(state?.price) * (100 - state?.discountPercent) / 100
+            setState({ ...state, discountPrice: parseInt(value) })
         }
-    }, [state?.salePercent, state?.price])
+        if (!state?.discountPercent) {
+            setState({ ...state, discountPrice: 0 })
+        }
+    }, [state?.discountPercent, state?.price])
 
     return (
         <div className=' w-full bg-white h-full'>
@@ -481,7 +484,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                             placeholder="0"
                                                             name="salePercent"
                                                             className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                            value={state?.salePercent}
+                                                            value={state?.discountPercent}
                                                             onChange={handleChangePercent}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -504,9 +507,9 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         type="text"
                                                         placeholder="0"
                                                         id="salePrice1"
-                                                        name="salePrice"
+                                                        name="salePrice1"
                                                         className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                        value={Number(state?.salePrice)?.toLocaleString()}
+                                                        value={Number(state?.discountPrice)?.toLocaleString()}
                                                         onChange={handleChangeSalePrice}
                                                         readOnly
                                                     />
@@ -939,7 +942,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         name="salePercent"
                                                         placeholder="0"
                                                         className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                        value={Number(state?.salePercent)?.toLocaleString()}
+                                                        value={state?.discountPercent}
                                                         onChange={handleChangePercent}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -958,9 +961,9 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="text"
                                                     placeholder="0"
                                                     id="salePrice2"
-                                                    name="salePrice"
+                                                    name="salePrice2"
                                                     className="inputStyle w-[85%] ll:w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                    value={Number(state?.salePrice)?.toLocaleString()}
+                                                    value={Number(state?.discountPrice)?.toLocaleString()}
                                                     onChange={handleChangeSalePrice}
                                                     readOnly
                                                 />
@@ -1397,7 +1400,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                             name="salePercent"
                                                             placeholder="0"
                                                             className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                            value={Number(state?.salePercent)?.toLocaleString()}
+                                                            value={state?.discountPercent}
                                                             onChange={handleChangePercent}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         />
@@ -1415,9 +1418,9 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         type="text"
                                                         placeholder="0"
                                                         id="salePrice3"
-                                                        name="salePrice"
+                                                        name="salePrice3"
                                                         className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                        value={Number(state?.salePrice)?.toLocaleString()}
+                                                        value={Number(state?.discountPrice)?.toLocaleString()}
                                                         onChange={handleChangeSalePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         readOnly
@@ -1628,7 +1631,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         name="salePercent"
                                                         placeholder="0"
                                                         className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                        value={Number(state?.salePercent)?.toLocaleString()}
+                                                        value={state?.discountPercent}
                                                         onChange={handleChangePercent}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -1649,9 +1652,9 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="text"
                                                     placeholder="0"
                                                     id="salePrice4"
-                                                    name="salePrice"
+                                                    name="salePrice4"
                                                     className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                    value={Number(state?.salePrice)?.toLocaleString()}
+                                                    value={Number(state?.discountPrice)?.toLocaleString()}
                                                     onChange={handleChangeSalePrice}
                                                     readOnly
                                                 />
@@ -1978,7 +1981,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                             placeholder="0"
                                                             name="salePercent"
                                                             className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                            value={Number(state?.salePercent)?.toLocaleString()}
+                                                            value={state?.discountPercent}
                                                             onChange={handleChangePercent}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -1997,9 +2000,9 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         type="text"
                                                         placeholder="0"
                                                         id="salePrice5"
-                                                        name="salePrice"
+                                                        name="salePrice5"
                                                         className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                        value={Number(state?.salePrice)?.toLocaleString()}
+                                                        value={Number(state?.discountPrice)?.toLocaleString()}
                                                         onChange={handleChangeSalePrice}
                                                         readOnly
                                                     />

@@ -64,16 +64,15 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
 
 
     useEffect(() => {
-        if (state?.salePercent > 0) {
+        if (Number(state?.salePercent) > 0) {
             const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
-            // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: parseInt(sale) })
-        } else {
-            setState({ ...state, salePrice: '' })
+        }
+        if (!state?.salePrice) {
+            setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
-
-    const handleOpenPopver = (newOpen) => {
+     const handleOpenPopver = (newOpen) => {
         setToggleShow(newOpen)
     }
     const handleSendDetail = (e) => {
@@ -120,30 +119,24 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
     }
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
-        // const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, priceNum: sanitizedValue });
     };
+
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, salePrice: formattedValue });
     };
+
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value });
+        }
+        if (!value) {
+            setState({ ...state, salePercent: "" });
         }
     };
     const onHandleSelectSize = (name) => {
@@ -157,8 +150,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             setState({ ...state, sizeListCheck: name })
         }
     }
-
-    const contentAccessories = (
+     const contentAccessories = (
         <div className="w-[650px] h-fit">
             <div
                 className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
@@ -571,7 +563,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
                         <span key={item?.id}>
-                             {languageDetector?.typeLang === "ru" && item?.name_ru}
+                            {languageDetector?.typeLang === "ru" && item?.name_ru}
                             {languageDetector?.typeLang === "uz" && item?.name_uz}
                         </span>
                     )
