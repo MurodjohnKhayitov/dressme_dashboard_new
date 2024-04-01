@@ -23,6 +23,7 @@ import { LanguageDetectorDress } from "../../../language/LanguageItem";
 import { dressRegionList } from "../../../hook/RegionList";
 import { GetProductList } from "../../../hook/GetProductList";
 import axiosInstance from "../../Authentication/AxiosIntance";
+import { BiCheckDouble } from "react-icons/bi";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
@@ -101,7 +102,7 @@ export default function ProductLocationsList() {
     setState({ ...state, shopMarketId: marketId });
 
     if (!addresNewId) {
-       setAddresNewId(addId);
+      setAddresNewId(addId);
       if (!checkedList.includes(itemId)) {
         setCheckedList((checkedList) => [...checkedList, itemId]);
       }
@@ -110,7 +111,7 @@ export default function ProductLocationsList() {
       }
     }
     if (addresNewId === addId) {
-       if (!checkedList.includes(itemId)) {
+      if (!checkedList.includes(itemId)) {
         setCheckedList((checkedList) => [...checkedList, itemId]);
       }
       if (checkedList.includes(itemId)) {
@@ -118,7 +119,7 @@ export default function ProductLocationsList() {
       }
     }
     if (addresNewId > 0 && addresNewId !== addId) {
-       setCheckedList([]);
+      setCheckedList([]);
       setAddresNewId(addId);
       if (!checkedList.includes(itemId)) {
         setCheckedList((checkedList) => [...checkedList, itemId]);
@@ -181,7 +182,7 @@ export default function ProductLocationsList() {
   const { refetch } = useQuery(["seller_getProductList_list1"], () => fetchData(customHeaders),
     {
       onSuccess: (data) => {
-         if (data?.status >= 200 && data?.status < 300) {
+        if (data?.status >= 200 && data?.status < 300) {
           // setDressInfo({ ...dressInfo, getProductList: data?.data });
           setGetProductList(data?.data)
         }
@@ -201,6 +202,10 @@ export default function ProductLocationsList() {
     setState({ ...state, shopMarketId: shopId });
     setAddresNewId(locationId);
     setGetIdProduct(itemId);
+    setDeleteMessage(null);
+    setSuccessMessage(null);
+    setGetIdShopLocation(null);
+    setHideProductList(false)
   }
 
   const onSendPeoductSeveralSelect = () => {
@@ -223,7 +228,7 @@ export default function ProductLocationsList() {
     })
       .then((res) => res.json())
       .then((res) => {
-         if (res?.problems?.length !== 0 && res?.message) {
+        if (res?.problems?.length !== 0 && res?.message) {
           setState({
             ...state,
             onErrorMessage: res,
@@ -248,7 +253,7 @@ export default function ProductLocationsList() {
             setState({ ...state, openSelectModal: false });
           }, 2000);
         }
-       })
+      })
       .catch((err) => {
         throw new Error(err || "something wrong");
       });
@@ -287,7 +292,7 @@ export default function ProductLocationsList() {
             setHideProductList(false);
           }, 2000);
         }
-       })
+      })
       .catch((err) => {
         throw new Error(err || "something wrong");
       });
@@ -443,14 +448,18 @@ export default function ProductLocationsList() {
   };
 
 
-  useEffect(() => {
-    if (!openStoreList) {
-      setDeleteMessage(null);
-      setSuccessMessage(null);
-    }
-  }, [openStoreList]);
+
   useEffect(() => {
     if (!state?.openSelectModal) {
+      setState({
+        ...state,
+        onSuccessMessaage: null,
+        onErrorTitle: null,
+        onErrorMessage: null,
+      });
+      setHideProductList(false);
+    }
+    return () => {
       setState({
         ...state,
         onSuccessMessaage: null,
@@ -562,7 +571,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
- 
+
   return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}
@@ -1054,7 +1063,7 @@ export default function ProductLocationsList() {
       </section>
       {/* Add the selected products to the new one */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList
+        className={` max-w-[440px]   md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList
           ? " bottom-0 md:flex"
           : "md:hidden bottom-[-800px] z-[-10]"
           }`}
@@ -1114,41 +1123,50 @@ export default function ProductLocationsList() {
             </div>
           ) : (
             <div className="w-full h-full overflow-y-auto VerticelScroll">
-              {getProductList?.products_locations?.map(
+              {getProductList?.products_locations?.filter(e => e?.shop_locations?.length > 0 || state?.shopMarketId == e?.id)?.map(
                 (item, index) => {
                   return (
-                    <div key={index} className="w-full cursor-pointer mt-2">
-                      {item?.shop_locations?.length >= 1 &&
+                    <div key={index} className="w-full cursor-pointer mt-2 b ">
+                      {
                         Number(state?.shopMarketId) === Number(item?.id) && (
-                          <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                            <span className=" hidden md:block text-textBlueColor text-lg md:text-2xl not-italic font-AeonikProMedium">
-                              {" "}
+                          <div className="w-full py-[10px] gap-y-2 flex items-center flex-col justify-center rounded-[5px]  ">
+                            <span className="  block text-textBlueColor text-lg md:text-2xl not-italic font-AeonikProMedium  ">
                               {item?.name}
                             </span>
-                            {item?.shop_locations?.map((data, index) => {
-                              return (
-                                <div
-                                  key={index}
-                                  onClick={() => setGetIdShopLocation(data?.id)}
-                                  className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id
-                                    ? "bg-LocationSelectBg bg-LocationSelectBg"
-                                    : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
-                                    }  `}
-                                >
-                                  {data?.id !== addresNewId && (
-                                    <div className="flex items-center gap-x-1 ">
-                                      <span className="text-[14px] md:text-[17px]">
-                                        {index + 1}
+                            <div className="flex flex-col gap-y-1"> 
+                              {item?.shop_locations?.map((data, index) => {
+                                return (
+                                  <div
+                                    key={index}
+                                    onClick={() => setGetIdShopLocation(data?.id)}
+                                    className={`w-full  flex items-center   rounded-[4px]   justify-center gap-x-1  ${getIdShopLocation == data?.id
+                                      ? "bg-LocationSelectBg bg-LocationSelectBg"
+                                      : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                                      }  `}
+                                  >
+                                    {data?.id !== addresNewId && (
+                                      <div className="flex items-center gap-x-1 ">
+                                        <span className="text-[14px] md:text-[17px]">
+                                          {index + 1}
+                                        </span>
+                                        )
+                                        <span className="text-black text-[14px] md:text-[17px] not-italic leading-4 flex items-center font-AeonikProMedium mr-[20px]">
+                                          {data?.address}
+                                        </span>
+                                      </div>
+                                    )}
+                                    {getIdShopLocation == data?.id && <span>
+                                      <span className="md:flex hidden">
+                                        <BiCheckDouble size={30} color="#007DCA" />
                                       </span>
-                                      )
-                                      <span className="text-black text-[14px] md:text-[17px] not-italic leading-4 flex items-center font-AeonikProMedium mr-[20px]">
-                                        {data?.address}
+                                      <span className="flex md:hidden">
+                                        <BiCheckDouble size={20} color="#007DCA" />
                                       </span>
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })}
+                                    </span>}
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </div>
                         )}
                     </div>
@@ -1962,7 +1980,7 @@ export default function ProductLocationsList() {
                                   : location
                               )
                               ?.map((resData, index) => {
-                                 return (
+                                return (
                                   <div key={index} className="w-full   ">
                                     <div className="w-full   ">
                                       <div className="mx-auto font-AeonikProRegular text-[16px] ">
