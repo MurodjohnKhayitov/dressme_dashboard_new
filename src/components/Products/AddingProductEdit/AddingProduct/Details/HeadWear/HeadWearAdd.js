@@ -215,6 +215,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
         })
     }, [checkColor])
+
     useEffect(() => {
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
@@ -246,7 +247,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     }
 
 
-
+console.log(getSizesIds,"getSizesIds");
+console.log(checkColor,"checkColor");
+console.log(checked,"checked");
      return (
         <div className={`w-full  ${SelectedNumber === Number(stateList?.category_id) ? "" : "hidden"}  h-fit overflow-hidden  my-2 `}>
             <div>

@@ -312,7 +312,7 @@ export default function LocationMapCity() {
     ?.split(" ")
     ?.join("");
 
-  
+
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
     modules: ["geocode", "SuggestView"],
@@ -620,16 +620,20 @@ export default function LocationMapCity() {
                 </span>
               </div>
 
-              <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
+              <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2  ">
                 {regionList?.regions ? (
                   regionList?.regions?.map((data, index) => {
                     return (
-                      <div key={data?.id} className="w-full  h-fit  ">
+                      <div key={data?.id} className={`w-full  h-fit ${data?.id === 2 ? "" : "opacity-50"} `}>
                         <div
-                          onClick={() => accordionCityList(data?.id)}
+                          onClick={data?.id === 2
+                            ? () => {
+                              accordionCityList(data?.id);
+                            }
+                            : null}
                           className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                         >
-                          <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                          <span className="text-[#303030] text-base md:text-lg not-italic font-AeonikProRegular">
                             {languageDetector?.typeLang === "ru" &&
                               data?.name_ru}
                             {languageDetector?.typeLang === "uz" &&
@@ -646,7 +650,7 @@ export default function LocationMapCity() {
                         </div>
 
                         <div
-                          className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                          className={`w-full grid grid-cols-3 xs:grid-cols-3 duration-[400ms]
                              ${activeIndex == data?.id
                               ? "openAccardion"
                               : "CloseAccardion"
@@ -678,7 +682,7 @@ export default function LocationMapCity() {
                                     }}
                                     required
                                   />
-                                  <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                                  <span className="text-[#303030]  cursor-pointer text-[13px] md:text-[15px]  not-italic font-AeonikProRegular">
                                     {languageDetector?.typeLang === "ru" &&
                                       item?.name_ru}
                                     {languageDetector?.typeLang === "uz" &&
@@ -693,7 +697,7 @@ export default function LocationMapCity() {
                     );
                   })
                 ) : (
-                  <p className="w-full h-full flex flex-col items-center justify-center">
+                  <p className="w-full h-full flex flex-col items-center justify-center text-[14px] md:text-base ">
                     {t("loading_data")}
                   </p>
                 )}
@@ -701,7 +705,7 @@ export default function LocationMapCity() {
               <div className="w-full flex items-center justify-end mt-2">
                 <span
                   onClick={() => setOpenRegionModal(false)}
-                  className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium"
+                  className="cursor-pointer text-textBlueColor text-base md:text-lg not-italic font-AeonikProMedium"
                 >
                   {t("ready")}
                 </span>
@@ -1476,7 +1480,7 @@ export default function LocationMapCity() {
                         {t("before")}
                       </span>
                       <input
-                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[38px] md:h-11 rounded md:rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
+                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[38px] md:h-11  rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
                         type="time"
                         min="00:00"
                         max="23:59"

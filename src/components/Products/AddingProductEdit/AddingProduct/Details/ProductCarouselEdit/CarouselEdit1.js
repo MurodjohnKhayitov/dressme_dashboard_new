@@ -33,7 +33,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
     const [imageArray, setImageArray] = useState([]);
 
     const [imageOne, setImageOne] = useState({
-        id1: null,
+        id1: Date.now(),
         product_color_id1: null,
         product_id1: null,
         status1: null,
@@ -45,7 +45,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         changed1: false
     });
     const [imageTwo, setImageTwo] = useState({
-        id2: null,
+        id2: Date.now(),
         product_color_id2: null,
         product_id2: null,
         status2: null,
@@ -58,7 +58,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
 
     });
     const [imageThree, setImageThree] = useState({
-        id3: null,
+        id3: Date.now(),
         product_color_id3: null,
         product_id3: null,
         status3: null,
@@ -71,7 +71,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
 
     });
     const [imageFour, setImageFour] = useState({
-        id4: null,
+        id4: Date.now(),
         product_color_id4: null,
         product_id4: null,
         status4: null,
@@ -103,6 +103,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageOne({
                 ...imageOne,
+                id1: Date.now(),
                 url_File1: compressedFile,
                 url_photo1: URL.createObjectURL(e.target.files[0]),
                 changed1: true
@@ -124,6 +125,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageTwo({
                 ...imageTwo,
+                id2: Date.now(),
                 url_File2: compressedFile,
                 url_photo2: URL.createObjectURL(e.target.files[0]),
                 changed2: true
@@ -146,6 +148,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageThree({
                 ...imageThree,
+                id3: Date.now(),
                 url_File3: compressedFile,
                 url_photo3: URL.createObjectURL(e.target.files[0]),
                 changed3: true
@@ -168,6 +171,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageFour({
                 ...imageFour,
+                id4: Date.now(),
                 url_File4: compressedFile,
                 url_photo4: URL.createObjectURL(e.target.files[0]),
                 changed4: true,
@@ -242,7 +246,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 productId: item?.product_id,
                 url: item?.url_photo
             }));
-         if (filteredItems) {
+        if (filteredItems) {
             setImageOne({
                 id1: filteredItems[0]?.id && filteredItems[0]?.id || null,
                 product_color_id1: filteredItems[0]?.productColorId && filteredItems[0]?.productColorId || null,
@@ -413,8 +417,8 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 }
             })
     }
-    
-    return (
+   
+     return (
         <div className='max-w-[350px] md:max-w-[300px] w-full h-fit  '>
             <section
                 onClick={() => {
