@@ -175,7 +175,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             maxFootLengthShow: false
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-             setState({
+            setState({
                 ...state,
                 quantityNum: Number(data?.amount) || null,
                 priceNum: Number(data?.price),
@@ -189,7 +189,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             })
         })
         // setState({ ...state, saveBtnDisable: false });
-     }, [state?.editSizeId, checkColor])
+    }, [state?.editSizeId, checkColor])
 
 
     const handleChangePrice = (event) => {
@@ -915,14 +915,12 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                         itemLayout="horizontal"
                         dataSource={stateList?.sizes}
                         className="w-full">
-                        {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
+                        {stateList?.sizes?.filter(e => Number(e?.shop_location_id) === dressInfo?.locationIdAddProduct && e?.product_color_id == checkColor)?.map((item, index) => {
 
                             return (
                                 <div key={item?.id}>
-                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct &&
-                                        <List.Item className="w-full "
-                                        >
-
+                                    {
+                                        <List.Item className="w-full ">
                                             <div className="flex items-center gap-x-1">
                                                 <div className="hidden md:flex items-center h-full">
                                                     <Checkbox value={item?.id} checked={checked} />
@@ -931,7 +929,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 <div
                                                     className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                                 >
-                                                    <p className=" flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index+1}</p>
+                                                    <p className=" flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index + 1}</p>
 
                                                     <div className="relative w-full flex gap-x-10 px-3 pt-5">
                                                         <div className="w-fit flex flex-col">
@@ -1115,7 +1113,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         <div className="flex items-center h-full">
                                                             <Checkbox value={item?.id} checked={checked} />
                                                         </div>
-                                                        <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index+1}</p>
+                                                        <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index + 1}</p>
 
                                                         <div onClick={() => {
                                                             DeleteSize()
