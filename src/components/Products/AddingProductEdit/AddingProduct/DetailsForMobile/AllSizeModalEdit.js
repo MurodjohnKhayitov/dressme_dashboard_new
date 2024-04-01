@@ -25,7 +25,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
 
   // name_ru
   const [checkColor, setCheckColor] = useState(productsDataIdEdit?.colors[0]?.pivot?.id)
-  const [addSizeColorById, setAddSizeColorById] = useState(false)
+  const [addSizeColorById, setAddSizeColorById] = useState(null)
   const [openColorModal, setOpenColorModal] = useState(false)
   const [sendingLoader, setSendingLoader] = useState(false)
   const [allSizeOfListId, setAllSizeOfListId] = useState([])
@@ -82,14 +82,9 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     }
   }
   function onHandleAddColorSize(id) {
-    if (!addSizeColorById) {
-      setAddSizeColorById(id)
-    }
-    if (addSizeColorById !== id) {
-      setAddSizeColorById(id)
-    }
+    setAddSizeColorById(id)
   }
-  
+
   const deleteSizeId = useMutation(() => {
     return request({
       url: `/products/${Number(deleteId)}/delete-product-size`, method: "POST",
@@ -217,8 +212,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     }
 
   }
- 
-  return (
+   return (
     <div className="w-full max-w-[440px]   md:max-w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
       <section
         onClick={() => {
@@ -254,7 +248,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
             null
             :
             productsDataIdEdit?.colors?.filter(e => e?.pivot?.id !== checkColor)?.map((data) => {
-              return (
+               return (
                 <div
                   key={data?.id}
                   className={`flex flex-col items-center justify-center `}>
@@ -270,12 +264,10 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
                       onClick={() => onHandleAddColorSize(data?.pivot?.color_id)}
                       style={{ background: `${data.hex}` }}
                       className="w-full h-full flex items-center justify-center">
-                      {data?.pivot?.color_id == addSizeColorById && data?.color_id !== 1 ?
-                        <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
-                        : null}
-                      {data?.pivot?.color_id == addSizeColorById && data?.color_id === 1 ?
-                        <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
-                        : null}
+                      {addSizeColorById && Number(data?.pivot?.color_id) === Number(addSizeColorById) && Number(data?.id) !== 1 &&
+                        <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />}
+                      {addSizeColorById && Number(data?.pivot?.color_id) === Number(addSizeColorById) && Number(data?.id) === 1 &&
+                        <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />}
                     </div>
                   </div>
                   <span
