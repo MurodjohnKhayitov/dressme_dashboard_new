@@ -459,15 +459,15 @@ export default function ProductLocationsList() {
       });
       setHideProductList(false);
     }
-    return () => {
-      setState({
-        ...state,
-        onSuccessMessaage: null,
-        onErrorTitle: null,
-        onErrorMessage: null,
-      });
-      setHideProductList(false);
-    }
+    // return () => {
+    //   setState({
+    //     ...state,
+    //     onSuccessMessaage: null,
+    //     onErrorTitle: null,
+    //     onErrorMessage: null,
+    //   });
+    //   setHideProductList(false);
+    // }
   }, [state?.openSelectModal]);
 
   useEffect(() => {
@@ -569,9 +569,10 @@ export default function ProductLocationsList() {
     openStoreList ||
     state?.openSelectModal ||
     state?.openDeleteModal ||
-    statusModal,
+    statusModal
   ]);
-
+  console.log(checkedList, "checkedList");
+  console.log(shopLocationIdList, "shopLocationIdList");
   return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}
@@ -630,7 +631,7 @@ export default function ProductLocationsList() {
             hideProductList: false,
             openDeleteModal: false,
           });
-          setShopLocationIdList();
+          // setShopLocationIdList();
         }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${deleteModal ||
@@ -777,7 +778,7 @@ export default function ProductLocationsList() {
                     <div key={index}>
                       {checkedList?.length > 0 ? (
                         Number(state?.shopMarketId) === Number(item?.id) && (
-                          <div className="w-full cursor-pointer mt-2">
+                          <div className="w-full cursor-pointer mt-2  ">
                             {item?.shop_locations?.length >= 1 && (
                               <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
                                 <span className=" hidden md:block text-textBlueColor text-lg md:text-2xl not-italic font-AeonikProMedium">
@@ -786,7 +787,7 @@ export default function ProductLocationsList() {
                                 </span>
                                 {item?.shop_locations?.map((data, index) => {
                                   return (
-                                    <div key={index}>
+                                    <div key={index} className=" ">
                                       {data?.id !== addresNewId && (
                                         <div
                                           onClick={() =>
@@ -795,18 +796,29 @@ export default function ProductLocationsList() {
                                               getShopLocationId: data?.id,
                                             })
                                           }
-                                          className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id
+                                          className={`w-full my-1 flex items-center  p-[2px] rounded-[4px] items-center justify-between gap-x-1  ${state?.getShopLocationId == data?.id
                                             ? "bg-LocationSelectBg bg-LocationSelectBg"
                                             : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
                                             }  `}
                                         >
-                                          <span className="text-[14px] md:text-[17px] mr-1">
-                                            {index + 1}
-                                          </span>
-                                          )
-                                          <span className="text-black text-[14px] md:text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                            {data?.address}
-                                          </span>
+                                          <div className="w-[90%] flex  gap-x-2">
+                                            <span className="text-[14px] md:text-[17px] ">
+                                              {index + 1}
+                                              <span className="ml-[2px]">)</span>
+                                            </span>
+
+                                            <span className="text-black text-[14px] md:text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                              {data?.address}
+                                            </span>
+                                          </div>
+                                          {state?.getShopLocationId == data?.id && <span>
+                                            <span className="md:flex hidden">
+                                              <BiCheckDouble size={30} color="#007DCA" />
+                                            </span>
+                                            <span className="flex md:hidden">
+                                              <BiCheckDouble size={20} color="#007DCA" />
+                                            </span>
+                                          </span>}
                                         </div>
                                       )}
                                     </div>
@@ -834,18 +846,22 @@ export default function ProductLocationsList() {
                                         getShopLocationId: data?.id,
                                       })
                                     }
-                                    className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id
+                                    className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-between gap-x-1  ${state?.getShopLocationId == data?.id
                                       ? "bg-LocationSelectBg bg-LocationSelectBg"
                                       : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
                                       }  `}
                                   >
-                                    <span className="text-[14px] md:text-[17px]">
-                                      {index + 1}
-                                    </span>
-                                    )
-                                    <p className="text-black text-[14px] md:text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                      {data?.address}
-                                    </p>
+                                    <div className="flex w-[100%]">
+                                      <span className="text-[14px] md:text-[17px]">
+                                        {index + 1}
+                                        <span className="ml-[2px]">)</span>
+                                      </span>
+
+                                      <p className="text-black text-[14px] md:text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                        {data?.address}
+                                      </p>
+                                    </div>
+
                                   </div>
                                 );
                               })}
@@ -972,7 +988,7 @@ export default function ProductLocationsList() {
       >
         <button
           onClick={() => {
-            setShopLocationIdList();
+            // setShopLocationIdList();
             setDeleteModal(false);
           }}
           type="button"
@@ -1073,6 +1089,7 @@ export default function ProductLocationsList() {
             setOpenStoreList(false);
             setDeleteMessage(null);
             setSuccessMessage(null);
+            setHideProductList(false);
           }}
           type="button"
           className="absolute  right-3 top-3 w-5 h-5 "
@@ -1133,7 +1150,7 @@ export default function ProductLocationsList() {
                             <span className="  block text-textBlueColor text-lg md:text-2xl not-italic font-AeonikProMedium  ">
                               {item?.name}
                             </span>
-                            <div className="flex flex-col gap-y-1"> 
+                            <div className="flex flex-col gap-y-1">
                               {item?.shop_locations?.map((data, index) => {
                                 return (
                                   <div
@@ -1233,11 +1250,11 @@ export default function ProductLocationsList() {
               {t("PRselected")}{" "}
               <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
-            {locationIsOneMore && <div className="w-fit">
+            {locationIsOneMore && <div className="w-fit  ">
               {checkedList?.length >= 1 && shopLocationIdList?.length > 1 ? (
                 <button
                   type="button"
-                  onClick={() => setState({ ...state, openSelectModal: true })}
+                  onClick={() => setState({ ...state, openSelectModal: true, getShopLocationId: null })}
                   className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-addLocationTextcolor  active:scale-95  active:opacity-70
               
               `}
