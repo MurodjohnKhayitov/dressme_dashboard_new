@@ -489,9 +489,9 @@ export default function ProductLocationsList() {
     if (languageDetector?.typeLang === "ru") {
       getProductList?.products_locations?.map((value1) => {
         value1?.shop_locations?.map((value2) => {
-          if (searchName.trim()) {
+          if (searchName?.trim()) {
             value2?.products
-              ?.filter((e) => e?.name_ru?.toLowerCase()?.includes(searchName.trim()?.toLowerCase()))
+              ?.filter((e) => e?.name_ru?.toLowerCase()?.includes(searchName?.trim()?.toLowerCase()))
               ?.map((value3) => {
                 if (!shopIdList?.includes(value3?.shop_id)) {
                   setShopIdList((shopIdList) => [
@@ -500,7 +500,7 @@ export default function ProductLocationsList() {
                   ]);
                 }
               });
-          } else if (!searchName.trim()) {
+          } else if (!searchName?.trim()) {
             setShopIdList((shopIdList) => [...shopIdList, Number(value1?.id)]);
           }
         });
@@ -509,11 +509,11 @@ export default function ProductLocationsList() {
     if (languageDetector?.typeLang === "uz") {
       getProductList?.products_locations?.map((value1) => {
         value1?.shop_locations?.map((value2) => {
-          if (searchName.trim()) {
+          if (searchName?.trim()) {
             value2?.products
-              ?.filter((e) => e?.name_uz?.toLowerCase()?.includes(searchName.trim()?.toLowerCase()))
+              ?.filter((e) => e?.name_uz?.toLowerCase()?.includes(searchName?.trim()?.toLowerCase()))
               ?.map((value3) => {
-                if (searchName.trim()) {
+                if (searchName?.trim()) {
                   if (!shopIdList?.includes(value3?.shop_id)) {
                     setShopIdList((shopIdList) => [
                       ...shopIdList,
@@ -522,7 +522,7 @@ export default function ProductLocationsList() {
                   }
                 }
               });
-          } else if (!searchName.trim()) {
+          } else if (!searchName?.trim()) {
             setShopIdList((shopIdList) => [...shopIdList, Number(value1?.id)]);
           }
         });

@@ -161,7 +161,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value });
         }
-        if (!value?.trim()) {
+        if (!value ) {
             setState({ ...state, salePercent: "" });
         }
     };

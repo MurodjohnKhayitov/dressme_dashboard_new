@@ -240,7 +240,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
             setState({ ...state, salePrice: sale })
         }
-        if (!state?.salePercent.trim()) {
+        if (!state?.salePercent ) {
             setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
