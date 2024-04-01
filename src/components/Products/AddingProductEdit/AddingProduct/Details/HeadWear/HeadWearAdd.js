@@ -66,7 +66,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             const sale = Number(state?.price) * (100 - state?.discountPercent) / 100
              setState({ ...state, discountPrice: parseInt(sale) })
         }
-        if (!state?.discountPercent.trim()) {
+        if (!state?.discountPercent ) {
             setState({ ...state, discountPrice: 0 })
         }
     }, [state?.discountPercent, state?.price])
@@ -208,7 +208,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         if (value >= 0 && value < 100) {
             setState({ ...state, discountPercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
-        if (!value.trim()) {
+        if (!value ) {
             setState({ ...state, discountPercent: "", saveBtnDisable: true, disableSizes: 1 });
         }
     };
