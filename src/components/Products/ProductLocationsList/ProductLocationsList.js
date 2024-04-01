@@ -571,8 +571,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal
   ]);
-  console.log(checkedList, "checkedList");
-  console.log(shopLocationIdList, "shopLocationIdList");
+ 
   return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}

@@ -283,7 +283,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
         }
     }
-    return (
+     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
             <div>
                 <section

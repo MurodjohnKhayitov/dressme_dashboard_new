@@ -417,11 +417,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 }
             })
     }
-    console.log(imageOne?.id1, "imageOne?.id1");
-    console.log(imageTwo?.id2, "imageTwo?.id2");
-    console.log(imageThree?.id3, "imageThree?.id3");
-    console.log(imageFour?.id4, "imageFour?.id4");
-    console.log(Number(modalId), Number(imageTwo?.id2));
+  
     return (
         <div className='max-w-[350px] md:max-w-[300px] w-full h-fit  '>
             <section
