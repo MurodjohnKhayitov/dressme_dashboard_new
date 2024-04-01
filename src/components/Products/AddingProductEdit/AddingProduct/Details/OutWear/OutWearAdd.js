@@ -85,7 +85,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
     )
     const [productId, setProductId] = useState(null);
     const [shopLocationId, setShopLocationId] = useState(null);
-     useEffect(() => {
+    useEffect(() => {
         stateList?.shop_locations?.map(item => {
             if (Number(item?.id) === Number(dressInfo?.locationIdAddProduct)) {
                 setProductId(item?.pivot?.product_id)
@@ -213,7 +213,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             maxHipsShow: false,
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-             setState({
+            setState({
                 ...state,
                 quantityNum: data?.amount || null,
                 priceNum: data?.price,
@@ -263,7 +263,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
     };
- 
+
     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
@@ -1553,10 +1553,10 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         itemLayout="horizontal"
                         dataSource={stateList?.sizes}
                         className="w-full">
-                        {stateList?.sizes?.filter(e => (e?.product_color_id == checkColor))?.map((item, index) => {
+                        {stateList?.sizes?.filter(e => Number(e?.shop_location_id) === dressInfo?.locationIdAddProduct && e?.product_color_id == checkColor)?.map((item, index) => {
                             return (
                                 <div key={item?.id}>
-                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct &&
+                                    {
                                         <List.Item className="w-full  ">
                                             <div className="flex items-center md:gap-x-1 ">
                                                 <div className="hidden md:flex items-center h-full">
@@ -1566,7 +1566,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div
                                                     className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                                 >
-                                                    <p className="flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index+1}</p>
+                                                    <p className="flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index + 1}</p>
 
                                                     <div className="relative w-full flex  gap-x-10 px-3 pt-5 ">
                                                         <div className="w-[20%] flex flex-col">
@@ -1825,23 +1825,17 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         </div>
                                                         <div className="w-[50%] flex flex-col items-start">
                                                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                                <div
+                                                                <p
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                                                     {t("SSsale")}
-                                                                </div>
+                                                                </p>
                                                             </div>
                                                             <div className="w-full flex items-center justify-center">
                                                                 <div className="w-full flex items-center gap-x-1 ">
                                                                     <div className="w-[40%] md:w-[72px] flex items-start">
                                                                         <div className="w-full h-10 flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[4px] md:px-[6px] py-[8px]">
-                                                                            <input
-                                                                                type="number"
-                                                                                name="discount_percent"
-                                                                                placeholder="0"
-                                                                                className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                                value={item?.discount_percent}
-                                                                                onChange={handleChangePercent}
-                                                                            />
+                                                                            <p className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
+                                                                            >{item?.discount_percent}</p>
                                                                             <span className="text-textLightColor ml-1">%</span>
                                                                         </div>
                                                                     </div>
@@ -1905,7 +1899,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         <div className="w-fit flex items-center h-full">
                                                             <Checkbox value={item?.id} checked={checked} />
                                                         </div>
-                                                        <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index+1}</p>
+                                                        <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index + 1}</p>
 
                                                         <div onClick={() => {
                                                             DeleteSize()
@@ -2203,14 +2197,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                 <div className="w-full flex items-center gap-x-1">
                                                                     <div className="w-[40%] md:w-[72px] flex items-start">
                                                                         <div className="w-full  h-[38px] flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[4px] md:px-[6px] py-[8px]">
-                                                                            <input
-                                                                                type="number"
-                                                                                name="discount_percent"
-                                                                                placeholder="0"
-                                                                                className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                                value={item?.discount_percent}
-                                                                                onChange={handleChangePercent}
-                                                                            />
+                                                                            <p className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
+                                                                            >{item?.discount_percent}</p>
                                                                             <span className="text-textLightColor ml-1">%</span>
                                                                         </div>
                                                                     </div>
