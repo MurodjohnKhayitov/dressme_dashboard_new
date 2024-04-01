@@ -33,7 +33,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
     const [imageArray, setImageArray] = useState([]);
 
     const [imageOne, setImageOne] = useState({
-        id1: Date.now(),
+        id1: Date.now() + 1,
         product_color_id1: null,
         product_id1: null,
         status1: null,
@@ -45,7 +45,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         changed1: false
     });
     const [imageTwo, setImageTwo] = useState({
-        id2: Date.now(),
+        id2: Date.now() + 2,
         product_color_id2: null,
         product_id2: null,
         status2: null,
@@ -58,7 +58,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
 
     });
     const [imageThree, setImageThree] = useState({
-        id3: Date.now(),
+        id3: Date.now() + 3,
         product_color_id3: null,
         product_id3: null,
         status3: null,
@@ -71,7 +71,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
 
     });
     const [imageFour, setImageFour] = useState({
-        id4: Date.now(),
+        id4: Date.now() + 4,
         product_color_id4: null,
         product_id4: null,
         status4: null,
@@ -103,7 +103,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageOne({
                 ...imageOne,
-                id1: Date.now(),
+                id1: imageOne?.id1 ? imageOne?.id1 : Date.now() + 1,
                 url_File1: compressedFile,
                 url_photo1: URL.createObjectURL(e.target.files[0]),
                 changed1: true
@@ -125,7 +125,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageTwo({
                 ...imageTwo,
-                id2: Date.now(),
+                id2: imageTwo?.id2 ? imageTwo?.id2 : Date.now() + 2,
                 url_File2: compressedFile,
                 url_photo2: URL.createObjectURL(e.target.files[0]),
                 changed2: true
@@ -148,7 +148,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageThree({
                 ...imageThree,
-                id3: Date.now(),
+                id3: imageThree?.id3 ? imageThree?.id3 : Date.now() + 3,
                 url_File3: compressedFile,
                 url_photo3: URL.createObjectURL(e.target.files[0]),
                 changed3: true
@@ -171,7 +171,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             const compressedFile = await imageCompression(imageFile, options);
             setImageFour({
                 ...imageFour,
-                id4: Date.now(),
+                id4: imageFour?.id4 ? imageFour?.id4 : Date.now() + 4,
                 url_File4: compressedFile,
                 url_photo4: URL.createObjectURL(e.target.files[0]),
                 changed4: true,
@@ -195,7 +195,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
     useEffect(() => {
         setImageArray([])
         setImageOne({
-            id1: null,
+            id1: Date.now() + 1,
             product_color_id1: null,
             product_id1: null,
             status1: null,
@@ -204,7 +204,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
 
         setImageFour({
-            id4: null,
+            id4: Date.now() + 4,
             product_color_id4: null,
             product_id4: null,
             status4: null,
@@ -213,7 +213,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
 
         setImageThree({
-            id3: null,
+            id3: Date.now() + 3,
             product_color_id3: null,
             product_id3: null,
             status3: null,
@@ -222,7 +222,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
 
         setImageTwo({
-            id2: null,
+            id2: Date.now() + 2,
             product_color_id2: null,
             product_id2: null,
             status2: null,
@@ -248,7 +248,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             }));
         if (filteredItems) {
             setImageOne({
-                id1: filteredItems[0]?.id && filteredItems[0]?.id || null,
+                id1: filteredItems[0]?.id && filteredItems[0]?.id || Date.now() + 1,
                 product_color_id1: filteredItems[0]?.productColorId && filteredItems[0]?.productColorId || null,
                 product_id1: filteredItems[0]?.productId && filteredItems[0]?.productId || null,
                 status1: filteredItems[0]?.status && filteredItems[0]?.status || null,
@@ -257,7 +257,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             })
 
             setImageTwo({
-                id2: filteredItems[1]?.id && filteredItems[1]?.id || null,
+                id2: filteredItems[1]?.id && filteredItems[1]?.id || Date.now() + 2,
                 product_color_id2: filteredItems[1]?.productColorId && filteredItems[1]?.productColorId || null,
                 product_id2: filteredItems[1]?.productId && filteredItems[1]?.productId || null,
                 status2: filteredItems[1]?.status && filteredItems[1]?.status || null,
@@ -266,7 +266,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             })
 
             setImageThree({
-                id3: filteredItems[2]?.id && filteredItems[2]?.id || null,
+                id3: filteredItems[2]?.id && filteredItems[2]?.id || Date.now() + 3,
                 product_color_id3: filteredItems[2]?.productColorId && filteredItems[2]?.productColorId || null,
                 product_id3: filteredItems[2]?.productId && filteredItems[2]?.productId || null,
                 status3: filteredItems[2]?.status && filteredItems[2]?.status || null,
@@ -274,7 +274,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 url_photo_change3: filteredItems[2]?.url && filteredItems[2]?.url || null,
             })
             setImageFour({
-                id4: filteredItems[3]?.id && filteredItems[3]?.id || null,
+                id4: filteredItems[3]?.id && filteredItems[3]?.id || Date.now() + 4,
                 product_color_id4: filteredItems[3]?.productColorId && filteredItems[3]?.productColorId || null,
                 product_id4: filteredItems[3]?.productId && filteredItems[3]?.productId || null,
                 status4: filteredItems[3]?.status && filteredItems[3]?.status || null,
@@ -417,8 +417,12 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 }
             })
     }
-   
-     return (
+    console.log(imageOne?.id1, "imageOne?.id1");
+    console.log(imageTwo?.id2, "imageTwo?.id2");
+    console.log(imageThree?.id3, "imageThree?.id3");
+    console.log(imageFour?.id4, "imageFour?.id4");
+    console.log(Number(modalId), Number(imageTwo?.id2));
+    return (
         <div className='max-w-[350px] md:max-w-[300px] w-full h-fit  '>
             <section
                 onClick={() => {
@@ -955,8 +959,8 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                             </div>
                         }
                         {Number(modalId) === Number(imageTwo?.id2) &&
-                            <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                                <div className="w-full h-full">
+                            <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0  ">
+                                <div className="w-full h-full  ">
 
                                     {!imageTwo?.url_photo2 ?
                                         <label
