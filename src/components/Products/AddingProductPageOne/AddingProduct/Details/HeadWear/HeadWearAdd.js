@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
- import { LineIcon, StarLabel } from "../../../../../../assets/icons";
+import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { BiPlus } from "react-icons/bi";
@@ -39,8 +39,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         }
 
     }, [typeId])
-    
- 
+
+
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
@@ -59,6 +59,9 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, discountPercent: value });
+        }
+        if (!value) {
+            setState({ ...state, discountPercent: "" });
         }
     };
 
@@ -114,18 +117,17 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     }
 
     useEffect(() => {
-        if (state?.discountPercent > 0) {
+        if (Number(state?.discountPercent) > 0) {
             const value = Number(state?.price) * (100 - state?.discountPercent) / 100
-            // const formattedValue = parseInt(value).toLocaleString()
             setState({ ...state, discountPrice: parseInt(value) })
-        } else {
-            setState({ ...state, discountPrice: '' })
+        }
+        if (!state?.discountPercent) {
+            setState({ ...state, discountPrice: 0 })
         }
     }, [state?.discountPercent, state?.price])
 
-
-    const contentHat = (
-        <div className="w-[520px] h-fit">
+     const contentHat = (
+        <div className="w-[650px] h-fit">
             <div
                 className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >
@@ -341,7 +343,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
                         <span key={item?.id}> {languageDetector?.typeLang === "ru" && item?.name_ru}
-                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                            {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                     )
                 })
             }

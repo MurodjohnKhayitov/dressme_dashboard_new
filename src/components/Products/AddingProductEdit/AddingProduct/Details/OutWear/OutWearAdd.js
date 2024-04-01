@@ -202,7 +202,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             minHips: stateList?.min_hip_girth || null,
             maxHips: stateList?.max_hip_girth || null,
             ageNum: stateList?.age || null,
-            salePercent: stateList?.discount_percent || null,
+            salePercent: stateList?.discount_percent || "",
             salePrice: stateList?.discount_price || null,
             sizeListCheck: stateList?.letter_size || null,
             productColorId: null,
@@ -226,7 +226,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                 minHips: data?.min_hip_girth || null,
                 maxHips: data?.max_hip_girth || null,
                 ageNum: data?.age || null,
-                salePercent: data?.discount_percent || null,
+                salePercent: Number(data?.discount_percent) > 0 ? Number(data?.discount_percent) : "",
                 salePrice: data?.discount_price || null,
                 sizeListCheck: data?.letter_size || null,
                 productColorId: data?.product_color_id || null,
@@ -238,9 +238,9 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
     useEffect(() => {
         if (Number(state?.salePercent) > 0) {
             const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
-            // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: sale })
-        } else {
+        }
+        if (!state?.salePercent.trim()) {
             setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
@@ -261,6 +261,9 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
+        }
+        if (!value) {
+            setState({ ...state, salePercent: "", saveBtnDisable: true, disableSizes: 1 });
         }
     };
 
@@ -312,7 +315,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
         }
     }
-    return (
+     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2  `}>
             <div>
                 <section
@@ -806,13 +809,13 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%]  flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{Number(state?.salePercent)?.toLocaleString()}</span>
+                                                            >{state?.salePercent}</span>
                                                             : <input
                                                                 type="number"
                                                                 name="salePercent"
                                                                 placeholder="0"
                                                                 className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                value={Number(state?.salePercent)?.toLocaleString()}
+                                                                value={state?.salePercent}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             />}
@@ -1386,13 +1389,13 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%]  flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{Number(state?.salePercent)?.toLocaleString()}</span>
+                                                            >{state?.salePercent}</span>
                                                             : <input
                                                                 type="number"
                                                                 name="salePercent"
                                                                 placeholder="0"
                                                                 className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                value={Number(state?.salePercent)?.toLocaleString()}
+                                                                value={state?.salePercent}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             />}

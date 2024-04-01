@@ -24,7 +24,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         amount: "",
         age: "",
         price: "",
-        discountPercent: 0,
+        discountPercent: "",
         discountPrice: "",
         isCheckValid: false,
         productColorId: "",
@@ -62,11 +62,11 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     }, [stateList])
     const SelectedNumber = 1
     useEffect(() => {
-        if (state?.discountPercent > 0) {
+        if (Number(state?.discountPercent) > 0) {
             const sale = Number(state?.price) * (100 - state?.discountPercent) / 100
-            // const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, discountPrice: parseInt(sale) })
-        } else {
+             setState({ ...state, discountPrice: parseInt(sale) })
+        }
+        if (!state?.discountPercent.trim()) {
             setState({ ...state, discountPrice: 0 })
         }
     }, [state?.discountPercent, state?.price])
@@ -167,7 +167,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             amount: null,
             age: null,
             price: null,
-            discountPercent: null,
+            discountPercent: "",
             discountPrice: null,
             productColorId: null,
             saveBtnDisable: false,
@@ -183,7 +183,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 amount: data?.amount || null,
                 age: data?.age || null,
                 price: Number(data?.price),
-                discountPercent: data?.discount_percent || null,
+                discountPercent: Number(data?.discount_percent) > 0 ? Number(data?.discount_percent) : "",
                 discountPrice: data?.discount_price || null,
                 productColorId: data?.product_color_id || null,
             })
@@ -208,8 +208,11 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         if (value >= 0 && value < 100) {
             setState({ ...state, discountPercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
+        if (!value.trim()) {
+            setState({ ...state, discountPercent: "", saveBtnDisable: true, disableSizes: 1 });
+        }
     };
-    useEffect(() => {
+     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
@@ -247,9 +250,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     }
 
 
-    console.log(getSizesIds, "getSizesIds");
-    console.log(checkColor, "checkColor");
-    console.log(checked, "checked");
+    
     return (
         <div className={`w-full  ${SelectedNumber === Number(stateList?.category_id) ? "" : "hidden"}  h-fit overflow-hidden  my-2 `}>
             <div>
@@ -481,15 +482,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[70%] flex items-center justify-start opacity-20 text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                            >{Number(state?.discountPercent)?.toLocaleString()}</span>
+                                                            >{state?.discountPercent}</span>
                                                             :
                                                             <input
                                                                 type="number"
                                                                 placeholder="0"
                                                                 name="discountPercent"
                                                                 className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                                value={Number(state?.discountPercent)?.toLocaleString()}
-                                                                defaultValue={0}
+                                                                value={state?.discountPercent}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             />}
@@ -752,7 +752,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                                 name="discountPercent"
                                                                 className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
                                                                 value={state?.discountPercent}
-                                                                defaultValue={0}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             />}
@@ -923,7 +922,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         {stateList?.sizes?.filter(e => Number(e?.shop_location_id) === dressInfo?.locationIdAddProduct && e?.product_color_id == checkColor)?.map((item, index) => {
                             return (
                                 <div key={item?.id}>
-                                    { 
+                                    {
                                         <List.Item className="w-full ">
                                             <div className="w-full flex items-center gap-x-1">
                                                 <div className="hidden md:flex items-center h-full">

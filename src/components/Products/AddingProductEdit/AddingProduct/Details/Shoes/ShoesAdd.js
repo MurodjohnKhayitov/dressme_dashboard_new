@@ -67,11 +67,11 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
     const [indeterminate, setIndeterminate] = useState(false);
     const [checkAll, setCheckAll] = useState(false);
     useEffect(() => {
-        if (state?.salePercent > 0) {
+        if (Number(state?.salePercent) > 0) {
             const sale = state?.priceNum * (100 - state?.salePercent) / 100
-            // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: parseInt(sale) })
-        } else {
+        }
+        if (!state?.salePercent) {
             setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
@@ -168,7 +168,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             maxFootLength: null,
             minSize: null,
             ageNum: null,
-            salePercent: null,
+            salePercent: "",
             salePrice: null,
             productColorId: null,
             saveBtnDisable: false,
@@ -183,7 +183,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                 maxFootLength: Number(data?.max_foot_length) || null,
                 minSize: Number(data?.wear_size) || null,
                 ageNum: Number(data?.age) || null,
-                salePercent: Number(data?.discount_percent) || null,
+                salePercent: Number(data?.discount_percent) > 0 ? Number(data?.discount_percent) : "",
                 salePrice: Number(data?.discount_price) || null,
                 productColorId: Number(data?.product_color_id) || null,
             })
@@ -195,8 +195,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        // const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, priceNum: sanitizedValue, saveBtnDisable: true, disableSizes: 1 });
+         setState({ ...state, priceNum: sanitizedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -208,6 +207,9 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
+        }
+        if (!value) {
+            setState({ ...state, salePercent: "", saveBtnDisable: true, disableSizes: 1 });
         }
     };
     // state?.priceNum

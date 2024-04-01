@@ -182,7 +182,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             minSize: null,
             ageNum: null,
             sizeListCheck: null,
-            salePercent: null,
+            salePercent: "",
             salePrice: null,
             productColorId: null,
             saveBtnDisable: false
@@ -197,7 +197,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                 minSize: data?.wear_size || null,
                 ageNum: data?.age || null,
                 sizeListCheck: data?.letter_size || null,
-                salePercent: data?.discount_percent || null,
+                salePercent: Number(data?.discount_percent) > 0 ? Number(data?.discount_percent) : "",
                 salePrice: data?.discount_price || null,
                 productColorId: data?.product_color_id || null,
             })
@@ -223,18 +223,20 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
+        if (!value) {
+            setState({ ...state, salePercent: "", saveBtnDisable: true, disableSizes: 1 });
+        }
     };
     useEffect(() => {
-        if (state?.salePercent > 0) {
+        if (Number(state?.salePercent) > 0) {
             const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
-            // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: parseInt(sale) })
-        } else {
-            setState({ ...state, salePrice: '' })
+        }
+        if (!state?.salePercent) {
+            setState({ ...state, salePrice: 0 })
         }
     }, [state?.priceNum, state?.salePercent])
-
-    useEffect(() => {
+     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
@@ -667,7 +669,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePercent || 0}</span>
+                                                            >{state?.salePercent}</span>
                                                             : <input
                                                                 type="number"
                                                                 placeholder="0"
@@ -1152,7 +1154,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePercent || 0}</span>
+                                                            >{state?.salePercent}</span>
                                                             : <input
                                                                 type="number"
                                                                 placeholder="0"
