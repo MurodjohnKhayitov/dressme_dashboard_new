@@ -582,7 +582,7 @@ export default function LocationMapCity() {
         <LoadingForSeller />
       ) : (
         <div className="w-full md:px-10 ">
-          <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
+          <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]  ">
             <div
               onClick={() => {
                 setOpenRegionModal(false);
