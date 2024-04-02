@@ -268,10 +268,10 @@ function MyMarket() {
                     </div>
                   </div>
                   <div className="  w-full flex items-center select-none md:hidden  mt-4 ">
-                    <p className="w-fit text-[13px] mr-2 flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                    <p className="w-fit text-[13px] mr-2 flex items-center md:w-[350px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
                       {t("status")}:
                     </p>
-                    <div className="w-[100px] flex items-center select-none ">
+                    <div className="min-w-[110px] flex items-center select-none ">
                       {data?.status === "approved" && (
                         <button
                           type="button"
@@ -306,6 +306,7 @@ function MyMarket() {
                         </button>
                       )}
                     </div>
+               
                   </div>
                   <div className="  w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[40px]  mt-4  md:mt-0    ">
                     <button
@@ -368,8 +369,9 @@ function MyMarket() {
         <div className="w-full flex items-center justify-center font-AeonikProMedium text-2xl h-[200px] ">
           {t("nothing_found")}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 export default React.memo(MyMarket);
