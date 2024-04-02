@@ -571,7 +571,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal
   ]);
- 
+
   return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}
@@ -1342,10 +1342,10 @@ export default function ProductLocationsList() {
                                 )
                                 ?.map((resData, index) => {
                                   return (
-                                    <div key={index} className="w-full      ">
-                                      <div className="w-full      ">
+                                    <div key={index} className="w-full ">
+                                      <div className="w-full ">
                                         <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                          <section className="flex items-center justify-between  md:mt-2  ">
+                                          <section className="flex flex-col gap-y-1 items-center justify-between  md:mt-2  ">
                                             <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
                                               <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                                 {checkedList?.length ===
@@ -1402,7 +1402,7 @@ export default function ProductLocationsList() {
                                                     ({resData?.address})
                                                   </span>
                                                   {resData?.products_count >= 1 && (
-                                                    <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
+                                                    <span className="text-black  text-[13px] md:text-base not-italic font-AeonikProMedium ml-1   ">
                                                       ({resData?.products_count})
                                                     </span>
                                                   )}
@@ -1427,6 +1427,11 @@ export default function ProductLocationsList() {
                                                   {t("PRaddWear")}
                                                 </span>
                                               </button>
+                                            </div>
+                                            <div className="w-full flex items-center md:hidden  pl-[25px]">
+                                              <span className=" text-[13px] text-black not-italic  flex items-center font-AeonikProMedium">
+                                                {resData?.address}
+                                              </span>
                                             </div>
                                           </section>
                                           {resData?.products?.length !== 0 && (
@@ -2000,7 +2005,7 @@ export default function ProductLocationsList() {
                                   <div key={index} className="w-full   ">
                                     <div className="w-full   ">
                                       <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                        <section className="flex items-center justify-between  md:mt-2">
+                                        <section className="flex flex-col gap-y-1 items-center justify-between  md:mt-2">
                                           <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
                                             <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                               {checkedList?.length ===
@@ -2051,7 +2056,7 @@ export default function ProductLocationsList() {
                                                   ({resData?.address})
                                                 </span>
                                                 {resData?.products_count >= 1 && (
-                                                  <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
+                                                  <span className="text-black text-[13px] md:text-base not-italic font-AeonikProMedium ml-1   ">
                                                     ({resData?.products_count})
                                                   </span>
                                                 )}
@@ -2076,6 +2081,11 @@ export default function ProductLocationsList() {
                                                 {t("PRaddWear")}
                                               </span>
                                             </button>
+                                          </div>
+                                          <div className="w-full flex items-center md:hidden  pl-[25px]">
+                                            <span className=" text-[13px]  not-italic  flex items-center font-AeonikProMedium">
+                                              {resData?.address}
+                                            </span>
                                           </div>
                                         </section>
                                         {resData?.products?.length !== 0 && (

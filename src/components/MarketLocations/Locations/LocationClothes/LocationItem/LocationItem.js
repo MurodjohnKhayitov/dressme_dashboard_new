@@ -227,57 +227,64 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
           className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${deleteModal || openStoreList || statusModal ? "" : "hidden"}`}
         ></section>
-        <div className=" w-full md:hidden flex items-center justify-between">
-          <div className="flex">
-            <Checkbox
-              defaultChecked={indeterminate}
-              onChange={onCheckAllChange}
-              checked={checkAll}
+        <div className=" w-full gap-y-1 flex-col md:hidden flex items-center justify-between">
+          <div className=" w-full flex items-center justify-between">
+            <div className="flex">
+              <Checkbox
+                defaultChecked={indeterminate}
+                onChange={onCheckAllChange}
+                checked={checkAll}
 
-              className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center w-[20px] h-[20px] `}
-            ></Checkbox>
-            <div className="text-black text-[12px]   not-italic flex items-center font-AeonikProMedium mr-[20px]">
-              {regionList?.regions
-                ?.filter((e) => e?.id == data?.region_id)
-                ?.map((values, index) => {
-                  return (
-                    <div key={index}>
-                      {values?.name_ru},
-                      {values?.sub_regions?.filter((e) => e?.id == data?.sub_region_id)?.map((valueSub) => {
-                        return (
-                          <span key={valueSub?.id} className="px-1">{valueSub?.name_ru}
-                            ,
-                          </span>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
-              <span className="hidden md:flex items-center ml-1   ">
-                ({data?.address})
-              </span>
-              {data?.products?.length > 1 && (
-                <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
-                  ({data?.products?.length})
+                className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center w-[20px] h-[20px] `}
+              ></Checkbox>
+              <div className="text-black text-[12px]   not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                {regionList?.regions
+                  ?.filter((e) => e?.id == data?.region_id)
+                  ?.map((values, index) => {
+                    return (
+                      <div key={index}>
+                        {values?.name_ru},
+                        {values?.sub_regions?.filter((e) => e?.id == data?.sub_region_id)?.map((valueSub) => {
+                          return (
+                            <span key={valueSub?.id} className="px-1">{valueSub?.name_ru}
+                              ,
+                            </span>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                <span className="hidden md:flex items-center ml-1   ">
+                  ({data?.address})
                 </span>
-              )}
+                {data?.products?.length > 1 && (
+                  <span className="text-black text-[13px] md:text-base not-italic font-AeonikProMedium ml-1   ">
+                    ({data?.products?.length})
+                  </span>
+                )}
+              </div>
             </div>
+            <button
+              type="button"
+              onClick={() => addNewProductId()}
+              className="active:scale-95 cursor-pointer active:opacity-70 flex items-center gap-x-[4px]"
+            >
+              <span className="hidden xs:flex text-addWearColorText text-[12px] not-italic font-AeonikProMedium">
+                {t("add_cloth")}
+              </span>
+              <span className="  xs:hidden flex">
+                <AddIconsCircle size={25} />
+              </span>
+              <span className="hidden xs:flex">
+                <AddIconsCircle />
+              </span>
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={() => addNewProductId()}
-            className="active:scale-95 cursor-pointer active:opacity-70 flex items-center gap-x-[4px]"
-          >
-            <span className="hidden xs:flex text-addWearColorText text-[12px] not-italic font-AeonikProMedium">
-              {t("add_cloth")}
+          <div className="w-full flex items-center md:hidden pl-[25px]">
+            <span className=" text-[13px]  not-italic  flex items-center font-AeonikProMedium">
+              {data?.address}
             </span>
-            <span className="  xs:hidden flex">
-              <AddIconsCircle size={25} />
-            </span>
-            <span className="hidden xs:flex">
-              <AddIconsCircle />
-            </span>
-          </button>
+          </div>
         </div>
         {/* ---------------------------------------- */}
         {/*status Modal */}
