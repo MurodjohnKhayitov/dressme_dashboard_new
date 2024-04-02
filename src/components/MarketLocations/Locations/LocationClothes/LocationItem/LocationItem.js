@@ -468,7 +468,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                 )
                 ?.map((itemValue, index) => {
                   return (
-                    <List.Item key={index} className="w-full  mt-6">
+                    <List.Item key={index} className="w-full  mt-6  ">
                       <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                         <div className="flex flex-col w-full">
                           <div className="w-full flex h-full items-center  ">
@@ -606,7 +606,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                 </div>
                               </div>
 
-                              <div className="mb-3 h-[148px]">
+                              <div className="mb-3 h-[148px]  ">
                                 <figure className="w-full h-full rounded-lg overflow-hidden">
                                   <span className="h-[138px] mx-auto w-[108px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                     <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />

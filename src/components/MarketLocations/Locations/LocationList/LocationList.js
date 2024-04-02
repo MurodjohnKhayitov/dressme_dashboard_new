@@ -373,10 +373,10 @@ function LocationList() {
                               </div>
                             </div>
 
-                            <div className="mb-3 max-h-[208px] h-full">
+                            <div className="mb-3    ">
                               <figure className="w-full h-full border border-lightBorderColor rounded-lg overflow-hidden">
                                 <img
-                                  className="w-[100%] h-[100%]  object-cover"
+                                  className="max-h-[218px] h-full w-full  object-cover"
                                   src={value?.url_image_path_one}
                                   alt=""
                                 />
