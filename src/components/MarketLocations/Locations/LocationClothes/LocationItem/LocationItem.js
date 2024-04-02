@@ -199,7 +199,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
     navigate(`/products/location/add/${Number(data?.shop_id)}`);
   }
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
@@ -407,32 +407,31 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                   className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}
                 ></Checkbox>
                 <div className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                  <p className="w-[5%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
+                  <p className="w-[5%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center   ">
                     No:
                   </p>
-                  <p className="w-[14%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
+                  <p className="w-[14%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center   ">
                     {t("photo")}
                   </p>
-                  <p className="w-[15%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
+                  <p className="w-[18%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center    ">
                     {t("name_of_product")}
                   </p>
-                  <p className="w-[15%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
-                    {t("vendor_code")}
-                  </p>
-                  <p className="w-[8%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
+
+                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center   ">
                     {t("type")}
                   </p>
-                  <p className="w-[8%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
+                  <p className="w-[11%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center   ">
                     {t("date")}
                   </p>
-                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
+                  <p className="w-[13%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center   ">
                     {t("price_of_product")}
                   </p>
-                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium "></p>
-                  <p className="w-[9%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
+
+                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center   "></p>
+                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center   ">
                     {t("delete")}
                   </p>
-                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
+                  <p className="w-[11%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center    ">
                     {t("status")}
                   </p>
                 </div>
@@ -463,72 +462,54 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                 ?.map((itemValue, index) => {
                   return (
                     <List.Item key={index} className="w-full  mt-6">
-                      <div className="w-full    flex flex-col items-center text-tableTextTitle">
-                        <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-                          <div className="flex flex-col w-full">
+                      <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+                        <div className="flex flex-col w-full">
+                          <div className="w-full flex h-full items-center  ">
                             <div className="w-full flex h-[100px]  hidden md:flex items-center  ">
                               <Checkbox
                                 value={itemValue?.id}
                                 checked={checked}
                               />
                               <div className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                                <div className="w-[5%]  h-full  flex items-center justify-center">
+                                <p className="w-[5%]  h-full  flex items-center justify-center  ">
                                   {index + 1}
-                                </div>
-                                <div className="w-[14%]  h-full bg-white flex items-center justify-center  rounded-[12px]">
+                                </p>
+                                <p className="w-[14%]  h-full flex items-center justify-center   ">
                                   <span className="w-[110px] h-[140px] border  border-lightBorderColor rounded-lg overflow-hidden">
-                                    <img
-                                      src={
-                                        itemValue?.photos[0]?.url_photo ||
-                                        "nodate"
-                                      }
-                                      alt={"noImg"}
+                                    <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"}
                                       className=" w-[110px] h-full object-cover"
                                     />
                                   </span>
-                                </div>
-                                <div className="w-[15%] h-full flex items-center ">
-                                  <span className="w-full  break-words text-center text-weatherWinterColor flex items-center  text-base not-italic font-AeonikProMedium">
+                                </p>
+                                <div className="w-[18%]  h-full break-all px-1 overflow-hidden  flex items-center  justify-center   ">
+                                  <p className="w-full   break-words text-center text-weatherWinterColor flex items-center justify-center text-base not-italic font-AeonikProMedium">
                                     {languageDetector?.typeLang === "ru" &&
                                       itemValue?.name_ru}
                                     {languageDetector?.typeLang === "uz" &&
                                       itemValue?.name_uz}
-                                  </span>
-                                </div>
-                                <div className="w-[15%] h-full flex items-center ">
-                                  {itemValue?.sku || "sku"}
+                                  </p>
                                 </div>
 
-                                <div
-                                  key={index}
-                                  className="w-[8%] h-full flex items-center "
+
+                                <p key={index}
+                                  className="w-[10%]  h-full  px-1 flex items-center justify-center  "
                                 >
                                   {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                   {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
-                                </div>
+                                </p>
 
-                                <div className="w-[8%] h-full flex items-center ">
-                                  {itemValue?.created_at || "created_at"}
-                                </div>
-
-                                <div className="w-[10%] h-full   flex items-center ">
-                                  {itemValue?.cost?.discount_price > 999
-                                    ? Number(itemValue?.cost?.discount_price)
-                                      ?.toLocaleString()
-                                      ?.split(",")
-                                      .join(" ")
-                                    : itemValue?.cost?.discount_price ||
-                                      itemValue?.cost?.price > 999
-                                      ? Number(itemValue?.cost?.price)
-                                        ?.toLocaleString()
-                                        ?.split(",")
-                                        .join(" ")
-                                      : itemValue?.cost?.price}
+                                <p className="w-[11%] h-full   px-1 flex items-center justify-center  ">
+                                  {itemValue?.created_at ||
+                                    "created_at"}
+                                </p>
+                                <p className="w-[13%] h-full  px-1 flex items-center justify-center  ">
+                                  {itemValue?.cost?.discount_price > 999 ? Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") : itemValue?.cost?.discount_price ||
+                                    itemValue?.cost?.price > 999 ? Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ") : itemValue?.cost?.price}
                                   <span className="ml-[6px] text-[14px]">
-                                    {t("currency")}
+                                    {t("PRsumm")}
                                   </span>
-                                </div>
-                                <div className="w-[10%] h-full  flex items-center ">
+                                </p>
+                                <div className="w-[11%] h-full  px-1 flex items-center justify-center  ">
                                   <button
                                     onClick={() =>
                                       goProductDetailEdit(
@@ -536,13 +517,13 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                         data?.id
                                       )
                                     }
-                                    className="text-[18px]  text-weatherWinterColor w-full text-center"
+                                    className="text-[18px] text-weatherWinterColor w-full text-center"
                                   >
                                     {t("more_details")}
                                   </button>
                                 </div>
 
-                                <div className="w-[9%] h-full  flex items-center  justify-center">
+                                <div className="w-[10%]  h-full  flex items-center justify-center  ">
                                   <button
                                     type="button"
                                     onClick={() => {
@@ -553,43 +534,53 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                     className="w-fit flex justify-center cursor-auto"
                                   >
                                     <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
-                                      <DeleteIcon width={30} />
+                                      <DeleteIcon
+                                        width={
+                                          30
+                                        }
+                                      />
                                     </span>
                                   </button>
                                 </div>
-                                {itemValue?.status === "approved" && (
-                                  <div className="w-[10%] h-fit  flex items-center justify-center  ">
-                                    <span className="min-w-[110px]  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full">
-                                      {t("approved")}
-                                    </span>
-                                  </div>
-                                )}
-                                {itemValue?.status === "declined" && (
-                                  <div
-                                    onClick={() =>
-                                      onHandleStatus(itemValue?.id)
-                                    }
-                                    className="w-[10%] h-fit cursor-pointer flex items-center justify-center  "
-                                  >
-                                    <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full">
-                                      {t("declined")}
-                                    </span>
-                                  </div>
-                                )}
-                                {itemValue?.status === "pending" && (
-                                  <div className="w-[10%] h-fit  flex items-center justify-center  ">
-                                    <span className="min-w-[110px]  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full">
-                                      {t("pending")}
-                                    </span>
-                                  </div>
-                                )}
-                                {itemValue?.status === "updated" && (
-                                  <div className="w-[10%] h-fit flex items-center justify-center">
-                                    <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full">
-                                      {t("updated")}
-                                    </span>
-                                  </div>
-                                )}
+                                {itemValue?.status ===
+                                  "approved" && (
+                                    <p className="w-[11%] h-fit  flex items-center justify-center   ">
+                                      <span className="min-w-[110px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                        {t("approved")}
+                                      </span>
+                                    </p>
+                                  )}
+                                {itemValue?.status ===
+                                  "declined" && (
+                                    <p
+                                      onClick={() =>
+                                        onHandleStatus(itemValue?.id)
+
+                                      }
+                                      className="w-[11%] h-fit cursor-pointer flex items-center  justify-center  "
+                                    >
+                                      <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                                        {t("declined")}
+                                      </span>
+                                    </p>
+                                  )}
+                                {itemValue?.status ===
+                                  "pending" && (
+                                    <p className="w-[11%] h-fit  flex items-center justify-center   ">
+                                      <span className="min-w-[110px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                        {t("pending")}
+                                      </span>
+                                    </p>
+                                  )}
+                                {itemValue?.status ===
+                                  "updated" && (
+                                    <p className="w-[11%] h-fit  flex items-center justify-center     ">
+                                      <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                        {t("updated")}
+                                      </span>
+                                    </p>
+                                  )}
+
                               </div>
                             </div>
                             {/* For Mobile Device */}

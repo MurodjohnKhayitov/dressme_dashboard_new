@@ -207,14 +207,14 @@ function LocationList() {
           </li>
         </ul>
       </div>
-      <div className="  mt-[70px]" >
+      <div className=" w-full mt-[70px] flex   flex-col justify-center  " >
         {shopLocationList?.locations
           ?.filter((e) =>
             e?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
           )
           ?.map((item, index) => {
             return (
-              <div key={item?.id} className="mt-5 md:mt-0">
+              <div key={item?.id} className="mt-5 md:mt-0 md:max-w-full max-w-[440px] w-full   mx-auto">
                 {item?.shop_locations?.length ? (
                   <div
                     key={item?.id}
@@ -253,12 +253,12 @@ function LocationList() {
 
                 {/* Table */}
                 {item?.shop_locations?.length ? (
-                  <div className="w-full h-fit md:border md:rounded-xl md:overflow-hidden flex flex-col gap-y-[30px]">
+                  <div className="w-full h-fit md:border md:rounded-xl md:overflow-hidden flex flex-col gap-y-[30px]  ">
                     {item?.shop_locations?.map((value, index) => {
                       return (
                         <div
                           key={value?.id}
-                          className="w-full h-full flex flex-col md:rounded-none overflow-auto rounded-xl"
+                          className="w-full h-full flex flex-col md:rounded-none overflow-auto rounded-xl  "
                         >
                           <ul
                             key={value?.id}
@@ -267,7 +267,7 @@ function LocationList() {
                             <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
                               {index + 1}
                             </li>
-                            <li className="w-[200px] h-[110px] flex items-center justify-center mr-[60px] rounded-lg overflow-hidden border">
+                            <li className="w-[200px] h-[110px] flex items-center justify-center mr-[60px] rounded-lg overflow-hidden   ">
                               <img
                                 className="w-[100%] h-[100%] object-cover rounded-lg"
                                 src={value?.url_image_path_one}
@@ -373,7 +373,7 @@ function LocationList() {
                               </div>
                             </div>
 
-                            <div className="mb-3 h-[148px]">
+                            <div className="mb-3 max-h-[208px] h-full">
                               <figure className="w-full h-full border border-lightBorderColor rounded-lg overflow-hidden">
                                 <img
                                   className="w-[100%] h-[100%]  object-cover"
@@ -382,8 +382,8 @@ function LocationList() {
                                 />
                               </figure>
                             </div>
-                            <div className="w-full flex items-center select-none md:hidden  my-3">
-                              <p className="w-fit text-[13px] mr-2 flex items-center md:w-[350px]   xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                            <div className="w-full flex items-center select-none md:hidden mt-8 my-3">
+                              <p className="w-fit text-[13px] mr-2 flex items-center md:w-[350px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
                                 {t("status")}:
                               </p>
                               <div className="min-w-[110px] flex items-center select-none ">
