@@ -1345,7 +1345,7 @@ export default function ProductLocationsList() {
                                     <div key={index} className="w-full ">
                                       <div className="w-full ">
                                         <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                          <section className="flex flex-col gap-y-1 items-center justify-between  md:mt-2  ">
+                                          <section className="flex flex-col gap-y-1    md:mt-2  ">
                                             <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
                                               <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                                 {checkedList?.length ===
@@ -2004,9 +2004,9 @@ export default function ProductLocationsList() {
                                 return (
                                   <div key={index} className="w-full   ">
                                     <div className="w-full   ">
-                                      <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                        <section className="flex flex-col gap-y-1 items-center justify-between  md:mt-2">
-                                          <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
+                                      <div className="mx-auto   font-AeonikProRegular text-[16px] ">
+                                        <section className="flex flex-col gap-y-1    md:mt-2 ">
+                                          <div className="w-full md:w-fit flex items-center justify-between md:justify-start ">
                                             <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                               {checkedList?.length ===
                                                 resData?.products?.length &&

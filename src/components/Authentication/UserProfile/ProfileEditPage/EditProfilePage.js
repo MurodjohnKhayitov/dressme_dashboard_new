@@ -241,7 +241,7 @@ function EditProfilePage() {
       ?.join("")
       ?.split(" ")
       ?.join("");
-   const card1 = state?.sellerCardNumber?.split("-");
+  const card1 = state?.sellerCardNumber?.split("-");
   const BankCard = card1?.join("");
 
   const UpdateSeller = () => {
@@ -1027,15 +1027,11 @@ function EditProfilePage() {
                                       {languageDetector?.typeLang === "uz" &&
                                         item?.name_uz}
                                       ,
-                                      {item?.sub_regions?.map((data) => {
-                                        return (
-                                          <span key={data?.id} className="ml-1 text-[14px] md:text-base">
-                                            {Number(data?.id) === Number(state?.sellerSubRegionId) &&
-                                              languageDetector?.typeLang === "ru" &&
-                                              data?.name_ru}
-                                            {Number(data?.id) === Number(state?.sellerSubRegionId) &&
-                                              languageDetector?.typeLang === "uz" &&
-                                              data?.name_uz}
+                                      {item?.sub_regions?.filter(e => Number(e?.id) === Number(state?.sellerSubRegionId))?.map((data) => {
+                                         return (
+                                          <span key={data?.id} className="ml-1 text-[14px] md:text-base ">
+                                            {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                            {languageDetector?.typeLang === "uz" && data?.name_uz}
                                           </span>
                                         );
                                       })}
