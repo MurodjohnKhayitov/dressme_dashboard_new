@@ -761,8 +761,8 @@ const AddingProduct = () => {
     // If all elements are equal, return true
     return true;
   }
-  const productUpdate = (childData) => {
-    setState({ ...state, isCheckValid: true })
+   const productUpdate = (childData) => {
+      setState({ ...state, isCheckValid: true })
     if (newArrayRes?.length && subSection_Id?.length) {
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
@@ -789,10 +789,10 @@ const AddingProduct = () => {
       childData && (productsDataIdEdit?.name_ru !== childData?.name_Ru) && form.append("name_ru", childData?.name_Ru);
       childData && (productsDataIdEdit?.quality_uz !== childData?.quality_Uz) && form.append("quality_uz", childData?.quality_Uz);
       childData && (productsDataIdEdit?.quality_ru !== childData?.quality_Ru) && form.append("quality_ru", childData?.quality_Ru);
-      childData && (productsDataIdEdit?.description_uz !== childData?.description_Uz) && form.append("description_uz", childData?.description_Uz);
-      childData && (productsDataIdEdit?.description_ru !== childData?.description_Ru) && form.append("description_ru", childData?.description_Ru);
-      childData && (productsDataIdEdit?.composition_uz !== childData?.composition_Uz) && form.append("composition_uz", childData?.composition_Uz);//no R
-      childData && (productsDataIdEdit?.composition_ru !== childData?.composition_Ru) && form.append("composition_ru", childData?.composition_Ru);//no R
+      childData?.description_Uz?.length && (productsDataIdEdit?.description_uz !== childData?.description_Uz) && form.append("description_uz", childData?.description_Uz);
+      childData?.description_Ru?.length && (productsDataIdEdit?.description_ru !== childData?.description_Ru) && form.append("description_ru", childData?.description_Ru);
+      childData?.composition_Uz?.length && (productsDataIdEdit?.composition_uz !== childData?.composition_Uz) && form.append("composition_uz", childData?.composition_Uz);//no R
+      childData?.composition_Ru?.length && (productsDataIdEdit?.composition_ru !== childData?.composition_Ru) && form.append("composition_ru", childData?.composition_Ru);//no R
       childData && !(Number(productsDataIdEdit?.brand_id) == childData?.brand_id) && form.append("brand_id", childData?.brand_id);//no R
 
       return fetch(`${url}/products/${Number(newProductId)}`, {
@@ -955,18 +955,18 @@ const AddingProduct = () => {
     if (colorAction) {
       if (state?.checkedSizeList?.length && state?.lastElementColorId) {
         setAddSizeDisable('AllSize')
-       }
+      }
       if (state?.newColorByAddSizes?.price && state?.newColorByAddSizes?.amount) {
         setAddSizeDisable('AddSize')
-       }
+      }
     }
     if (!colorAction) {
       setAddSizeDisable(null)
     }
 
   }, [state?.checkedSizeList?.length, state?.lastElementColorId, addSizeDisable, colorAction, state?.newColorByAddSizes?.price, state?.newColorByAddSizes?.amount])
- 
-    useEffect(() => {
+
+  useEffect(() => {
     if (!dressInfo?.locationIdAddProduct) {
       navigate(-1)
     }
@@ -2375,6 +2375,11 @@ const AddingProduct = () => {
                                     key={"item_" + item.id}
                                     value={item?.id}
                                     attribute2={item?.category_id}
+                                    label={
+                                      languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                        languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                          undefined
+                                    }
                                   >
                                     {languageDetector?.typeLang === "ru" && item?.name_ru}
                                     {languageDetector?.typeLang === "uz" && item?.name_uz}
@@ -2386,6 +2391,11 @@ const AddingProduct = () => {
                                     key={"item_" + item.id}
                                     value={item?.id}
                                     attribute2={item?.category_id}
+                                    label={
+                                      languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                        languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                          undefined
+                                    }
                                   >
                                     {languageDetector?.typeLang === "ru" && item?.name_ru}
                                     {languageDetector?.typeLang === "uz" && item?.name_uz}

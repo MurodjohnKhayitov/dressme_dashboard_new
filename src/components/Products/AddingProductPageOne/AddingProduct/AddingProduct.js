@@ -815,7 +815,7 @@ const AddingProduct = () => {
   useEffect(() => {
     if (newId) {
       shopList?.shops?.filter(e => Number(e?.id) === Number(newId))?.map(item => {
-         setGenderFilterId(item?.gender_id)
+        setGenderFilterId(item?.gender_id)
       })
     }
     if (!newId && state?.shopId) {
@@ -828,7 +828,7 @@ const AddingProduct = () => {
     //   setDressInfo({ ...dressInfo, locationIdAddProduct: null })
     // }
   }, [state?.shopId])
-   return (
+  return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
         <LoadingForSeller />
@@ -1343,7 +1343,7 @@ const AddingProduct = () => {
 
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) == 3 ? e : (e?.id == genderFilterId || e?.id == 3))?.map((item) => {
-                             return (
+                            return (
                               <div onClick={() => selectGenderId(item?.id)} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
                                 {languageDetector?.typeLang === "uz" && item?.name_uz}
