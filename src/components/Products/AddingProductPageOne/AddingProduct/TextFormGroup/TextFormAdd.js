@@ -113,46 +113,53 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
 
     const handleInputTitleRu = (e) => {
         if (e.target.value) {
-            setState({ ...state, titleInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+            const formattedAddress = e.target.value?.trim();
+            setState({ ...state, titleInRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1) })
         } else {
             setState({ ...state, titleInRu: null })
         }
     }
     const handleInputTitleUz = (e) => {
         if (e.target.value) {
-            setState({ ...state, titleInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+            const formattedAddress = e.target.value?.trim();
+            setState({ ...state, titleInUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1) })
         } else {
             setState({ ...state, titleInUz: null })
         }
     }
     const handleInputDescripRu = (e) => {
         if (e.target.value) {
-            setState({ ...state, descriptionInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+            const formattedAddress = e.target.value?.trim();
+            setState({ ...state, descriptionInRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1) })
         } else {
             setState({ ...state, descriptionInRu: null })
         }
     }
     const handleInputDescripUz = (e) => {
         if (e.target.value) {
-            setState({ ...state, descriptionInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+            const formattedAddress = e.target.value?.trim();
+            setState({ ...state, descriptionInUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1) })
         } else {
             setState({ ...state, descriptionInUz: null })
         }
     }
     const handleInputNoteRu = (e) => {
         if (e.target.value) {
-            setState({ ...state, noteValueRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+            const formattedAddress = e.target.value?.trim();
+            setState({ ...state, noteValueRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1) })
         } else {
             setState({ ...state, noteValueRu: null })
         }
     }
     const handleInputNoteUz = (e) => {
         if (e.target.value) {
-            setState({ ...state, noteValueUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+            const formattedAddress = e.target.value?.trim();
+            setState({ ...state, noteValueUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1) })
         } else {
             setState({ ...state, noteValueUz: null })
         }
     }
+    
     return (
         <div className="w-full flex py-[40px] md:py-[50px] ">
             {/* <ToastContainer

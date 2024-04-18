@@ -793,7 +793,7 @@ const AddingProduct = () => {
       childData?.description_Ru?.length && (productsDataIdEdit?.description_ru !== childData?.description_Ru) && form.append("description_ru", childData?.description_Ru);
       childData?.composition_Uz?.length && (productsDataIdEdit?.composition_uz !== childData?.composition_Uz) && form.append("composition_uz", childData?.composition_Uz);//no R
       childData?.composition_Ru?.length && (productsDataIdEdit?.composition_ru !== childData?.composition_Ru) && form.append("composition_ru", childData?.composition_Ru);//no R
-      childData && !(Number(productsDataIdEdit?.brand_id) == childData?.brand_id) && form.append("brand_id", childData?.brand_id);//no R
+      childData && childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
 
       return fetch(`${url}/products/${Number(newProductId)}`, {
         method: "POST",
