@@ -678,8 +678,14 @@ const AddingProduct = () => {
         season_Id &&
         state?.pictureBgFile1
       ) {
-        setDressInfo({ ...dressInfo, nextPageShowForm: false });
-        setState({ ...state, isCheckValid: false });
+        if (newArray?.length > 0 && subSection_Id?.length > 0) {
+          setDressInfo({ ...dressInfo, nextPageShowForm: false });
+          setState({ ...state, isCheckValid: false });
+        }
+        if (newArray?.length === 0 && subSection_Id?.length === 0) {
+          setDressInfo({ ...dressInfo, nextPageShowForm: false });
+          setState({ ...state, isCheckValid: false });
+        }
       }
     }
   };
@@ -828,6 +834,7 @@ const AddingProduct = () => {
     //   setDressInfo({ ...dressInfo, locationIdAddProduct: null })
     // }
   }, [state?.shopId])
+
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -1819,13 +1826,13 @@ const AddingProduct = () => {
                           className={`w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 
                           ${state?.isCheckValid &&
                               !subSection_Id?.length &&
-                              newArray?.length
+                              newArray?.length > 0
                               ? "overflow-hidden border border-[#FFB8B8] !bg-[#FFF6F6]"
                               : "border border-borderColor"
                             }
                           `}
                         >
-                          {subSection_Id?.length ?
+                          {subSection_Id?.length > 0 ?
                             <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
                               {newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => {
                                 return (
@@ -1851,7 +1858,7 @@ const AddingProduct = () => {
                           <Select
                             className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid &&
                               !subSection_Id?.length &&
-                              newArray?.length
+                              newArray?.length > 0
                               ? " overflow-hidden border border-[#FFB8B8] "
                               : ""
                               }`}
