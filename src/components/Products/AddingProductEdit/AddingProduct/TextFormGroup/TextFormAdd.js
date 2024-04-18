@@ -31,7 +31,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
         onEditTextForm: false
     })
     useEffect(() => {
-         setState({
+        setState({
             ...state,
             titleInRu: productsEdit?.name_ru,
             titleInUz: productsEdit?.name_uz,
@@ -157,28 +157,33 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
     }
     const handleInputDescripRu = (e) => {
         if (e.target.value) {
-            setState({ ...state, descriptionInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
+            setState({ ...state, descriptionInRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
         } else {
             setState({ ...state, descriptionInRu: "" })
         }
     }
     const handleInputDescripUz = (e) => {
         if (e.target.value) {
-            setState({ ...state, descriptionInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
+            setState({ ...state, descriptionInUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
         } else {
             setState({ ...state, descriptionInUz: "" })
         }
     }
     const handleInputNoteRu = (e) => {
         if (e.target.value) {
-            setState({ ...state, noteValueRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
+
+            setState({ ...state, noteValueRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
         } else {
             setState({ ...state, noteValueRu: "" })
         }
     }
     const handleInputNoteUz = (e) => {
         if (e.target.value) {
-            setState({ ...state, noteValueUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
+            setState({ ...state, noteValueUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
         } else {
             setState({ ...state, noteValueUz: "" })
         }
