@@ -762,7 +762,7 @@ const AddingProduct = () => {
     return true;
   }
   const productUpdate = (childData) => {
-     setState({ ...state, isCheckValid: true })
+    setState({ ...state, isCheckValid: true })
     if (newArrayRes?.length && subSection_Id?.length) {
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
@@ -1620,24 +1620,41 @@ const AddingProduct = () => {
                           return (
                             <div key={item?.id}>
                               {searchList ?
-                                languageDetector?.typeLang === "ru" ?
-                                  item?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase())
-                                  : item?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) &&
-                                  <div
-                                    onClick={() => selectTypeById(item?.id, item?.category_id)}
-                                    key={item?.id}
-                                    className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                    {state?.filterTypeId == (item?.id) &&
-                                      <span onClick={() => ClearSelectTypeById(item?.id)}>
-                                        <MenuCloseIcons colors={'#a1a1a1'} /></span>}
-                                  </div>
+                                <div>
+                                  {
+                                    languageDetector?.typeLang === "uz" &&
+                                    item?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase())
+                                    &&
+                                    <div
+                                      onClick={() => selectTypeById(item?.id, item?.category_id)}
+                                      key={item?.id}
+                                      className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor  text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                      {state?.filterTypeId == (item?.id) &&
+                                        <span onClick={() => ClearSelectTypeById(item?.id)}>
+                                          <MenuCloseIcons colors={'#a1a1a1'} /></span>}
+                                    </div>}
+                                  {languageDetector?.typeLang === "ru" &&
+                                    item?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase())
+                                    &&
+                                    <div
+                                      onClick={() => selectTypeById(item?.id, item?.category_id)}
+                                      key={item?.id}
+                                      className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor  text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                      {state?.filterTypeId == (item?.id) &&
+                                        <span onClick={() => ClearSelectTypeById(item?.id)}>
+                                          <MenuCloseIcons colors={'#a1a1a1'} /></span>}
+                                    </div>}
+                                </div>
+
                                 :
                                 <div
                                   onClick={() => selectTypeById(item?.id, item?.category_id)}
                                   key={item?.id}
-                                  className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                  className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor  text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                   {languageDetector?.typeLang === "ru" && item?.name_ru}
                                   {languageDetector?.typeLang === "uz" && item?.name_uz}
                                   {state?.filterTypeId == (item?.id) &&

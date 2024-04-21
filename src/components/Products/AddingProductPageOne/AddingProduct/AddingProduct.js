@@ -1,4 +1,4 @@
-import { Popover, Select, Space, Switch, TreeSelect } from "antd";
+import { Select, Space } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import {
   AddIconsCircle1,
@@ -11,7 +11,7 @@ import {
   SearchIcon,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
@@ -22,11 +22,9 @@ import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
 import { BiCheck, BiCheckDouble } from "react-icons/bi";
-// import { DownOutlined } from '@ant-design/icons'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
-import axios from "axios";
 import imageCompression from "browser-image-compression";
 import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 import { useTranslation } from "react-i18next";
@@ -35,7 +33,6 @@ import { ShopList } from "../../../../hook/ShopList";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../../Authentication/AxiosIntance";
 
-const { REACT_APP_BASE_URL } = process.env;
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
@@ -45,7 +42,6 @@ const AddingProduct = () => {
   const [shopList, setShopList] = useContext(ShopList)
 
   const navigate = useNavigate();
-  const { request } = useHttp();
   const { t } = useTranslation("product");
   const [languageDetector] = useContext(LanguageDetectorDress);
 
@@ -665,7 +661,7 @@ const AddingProduct = () => {
 
       if (
         Number(dressInfo?.locationIdAddProduct) &&
-        section_Id &&
+        section_Id?.length > 0 &&
         state?.color_Id &&
         state?.gender_Id &&
         state?.min_Age_Category &&

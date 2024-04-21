@@ -63,16 +63,9 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
     }, [typeId])
 
 
-    useEffect(() => {
-        if (Number(state?.salePercent) > 0) {
-            const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
-            setState({ ...state, salePrice: parseInt(sale) })
-        }
-        if (!state?.salePrice) {
-            setState({ ...state, salePrice: 0 })
-        }
-    }, [state?.salePercent, state?.priceNum])
-     const handleOpenPopver = (newOpen) => {
+
+
+    const handleOpenPopver = (newOpen) => {
         setToggleShow(newOpen)
     }
     const handleSendDetail = (e) => {
@@ -117,7 +110,18 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         setToggleShow(false)
         handleCallBack()
     }
-    const handleChangePrice = (event) => {
+    useEffect(() => {
+        if (Number(state?.salePercent) > 0) {
+            const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
+            setState({ ...state, salePrice: parseInt(sale) })
+        }
+        if (!state?.salePercent) {
+            setState({ ...state, salePrice: 0 })
+        }
+    }, [state?.salePercent, state?.priceNum])
+    
+
+     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         setState({ ...state, priceNum: sanitizedValue });
@@ -150,8 +154,8 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             setState({ ...state, sizeListCheck: name })
         }
     }
-     const contentAccessories = (
-        <div className="w-[650px] h-fit">
+    const contentAccessories = (
+        <div className="w-[650px] h-fit  ">
             <div
                 className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >

@@ -38,8 +38,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
             setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
-
-    const [toggleShow, setToggleShow] = useState(false)
+     const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
     const SelectedNumber = 4
     useEffect(() => {
