@@ -761,8 +761,9 @@ const AddingProduct = () => {
     // If all elements are equal, return true
     return true;
   }
-   const productUpdate = (childData) => {
-      setState({ ...state, isCheckValid: true })
+  const productUpdate = (childData) => {
+    console.log(childData?.composition_Uz?.trim(), "childData");
+    setState({ ...state, isCheckValid: true })
     if (newArrayRes?.length && subSection_Id?.length) {
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
@@ -873,14 +874,14 @@ const AddingProduct = () => {
       !(productsDataIdEdit?.sku == state?.sku) && form.append("sku", state?.sku);
       !(productsDataIdEdit?.type_id == state?.filterTypeId) && form.append("type_id", parseFloat(state?.filterTypeId));
       !(productsDataIdEdit?.producer_id == state?.producer_Id) && form.append("producer_id", state?.producer_Id);
-      childData && childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
-      childData && childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
-      childData && childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
-      childData && childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
-      childData && childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
-      childData && childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
-      childData && childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
-      childData && childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
+      childData && (productsDataIdEdit?.name_uz !== childData?.name_Uz) && form.append("name_uz", childData?.name_Uz);
+      childData && (productsDataIdEdit?.name_ru !== childData?.name_Ru) && form.append("name_ru", childData?.name_Ru);
+      childData && (productsDataIdEdit?.quality_uz !== childData?.quality_Uz) && form.append("quality_uz", childData?.quality_Uz);
+      childData && (productsDataIdEdit?.quality_ru !== childData?.quality_Ru) && form.append("quality_ru", childData?.quality_Ru);
+      childData?.description_Uz?.length && (productsDataIdEdit?.description_uz !== childData?.description_Uz) && form.append("description_uz", childData?.description_Uz);
+      childData?.description_Ru?.length && (productsDataIdEdit?.description_ru !== childData?.description_Ru) && form.append("description_ru", childData?.description_Ru);
+      childData?.composition_Uz?.length && (productsDataIdEdit?.composition_uz !== childData?.composition_Uz) && form.append("composition_uz", childData?.composition_Uz);//no R
+      childData?.composition_Ru?.length && (productsDataIdEdit?.composition_ru !== childData?.composition_Ru) && form.append("composition_ru", childData?.composition_Ru);//no R
       childData && childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
 
       return fetch(`${url}/products/${Number(newProductId)}`, {
