@@ -762,8 +762,7 @@ const AddingProduct = () => {
     return true;
   }
   const productUpdate = (childData) => {
-    console.log(childData?.composition_Uz?.trim(), "childData");
-    setState({ ...state, isCheckValid: true })
+     setState({ ...state, isCheckValid: true })
     if (newArrayRes?.length && subSection_Id?.length) {
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
