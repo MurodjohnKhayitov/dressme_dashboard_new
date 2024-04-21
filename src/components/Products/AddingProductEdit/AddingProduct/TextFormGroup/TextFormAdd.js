@@ -157,38 +157,59 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
     }
     const handleInputDescripRu = (e) => {
         if (e.target.value) {
-            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
-            setState({ ...state, descriptionInRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            if (state?.descriptionInRu?.length >= 1) {
+                const formattedAddress = e.target.value; // Trim removes leading and trailing spaces
+                setState({ ...state, descriptionInRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            } else {
+                const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
+                setState({ ...state, descriptionInRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            }
         } else {
             setState({ ...state, descriptionInRu: "" })
         }
     }
     const handleInputDescripUz = (e) => {
         if (e.target.value) {
-            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
-            setState({ ...state, descriptionInUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            if (state?.descriptionInUz?.length >= 1) {
+                const formattedAddress = e.target.value; // Trim removes leading and trailing spaces
+                setState({ ...state, descriptionInUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            } else {
+                const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
+                setState({ ...state, descriptionInUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            }
+
         } else {
             setState({ ...state, descriptionInUz: "" })
         }
     }
     const handleInputNoteRu = (e) => {
         if (e.target.value) {
-            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
-
-            setState({ ...state, noteValueRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            if (state?.noteValueRu?.length >= 1) {
+                const formattedAddress = e.target.value; // Trim removes leading and trailing spaces
+                setState({ ...state, noteValueRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            } else {
+                const formattedAddress = e.target.value?.trim() // Trim removes leading and trailing spaces
+                setState({ ...state, noteValueRu: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            }
         } else {
             setState({ ...state, noteValueRu: "" })
         }
     }
     const handleInputNoteUz = (e) => {
         if (e.target.value) {
-            const formattedAddress = e.target.value?.trim(); // Trim removes leading and trailing spaces
-            setState({ ...state, noteValueUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            if (state?.noteValueUz?.length >= 1) {
+                const formattedAddress = e.target.value; // Trim removes leading and trailing spaces
+                setState({ ...state, noteValueUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            } else {
+                const formattedAddress = e.target.value?.trim() // Trim removes leading and trailing spaces
+                setState({ ...state, noteValueUz: formattedAddress?.charAt(0).toUpperCase() + formattedAddress?.slice(1), onEditTextForm: true })
+            }
+
         } else {
             setState({ ...state, noteValueUz: "" })
         }
     }
-
+     
     // Категория одежды хлопок
     return (
         <div className="w-full  flex py-[40px] md:py-[50px] ">
